@@ -43,23 +43,23 @@ abstract class AbstractGenJava {
     protected String parseJavaType(FieldElement fe) {
         String type = fe.type;
         if (type.equals("int")) {
-            return "Integer.parseInt( element.getChildText(\"" + fe.name;
+            return "Integer.parseInt( element.getChildText(\"";
         } else if (type.equals("short")) {
-            return "Short.parseShort( element.getChildText(\"" + fe.name;
+            return "Short.parseShort( element.getChildText(\"";
         } else if (type.equals("float")) {
-            return "Float.parseFloat( element.getChildText(\"" + fe.name;
+            return "Float.parseFloat( element.getChildText(\"";
         } else if (type.equals("String")) {
-            return "element.getChildText(\"" + fe.name;
+            return "element.getChildText(\"";
         } else if (type.equals("double")) {
-            return "Double.parseDouble( element.getChildText(\"" + fe.name;
+            return "Double.parseDouble( element.getChildText(\"";
         } else if (type.equals("byte")) {
-            return "Byte.parseByte( element.getChildText(\"" + fe.name;
+            return "Byte.parseByte( element.getChildText(\"";
         } else if (type.equals("char")) {
-            return "(char)" + "Integer.parseInt( element.getChildText(\"" + fe.name;
+            return "(char)" + "Integer.parseInt( element.getChildText(\"";
         } else if (type.equals("boolean")) {
-            return "Boolean.parseBoolean( element.getChildText(\"" + fe.name;
+            return "Boolean.parseBoolean( element.getChildText(\"";
         } else if (type.equals("long")) {
-            return "Long.parseLong( element.getChildText(\"" + fe.name;
+            return "Long.parseLong( element.getChildText(\"";
         } else {
             return "???";
         }

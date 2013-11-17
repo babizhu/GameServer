@@ -1,6 +1,7 @@
-package org.bbz.game.cfg.fighter;
+package experiment.serialize;
 
-import org.jdom2.Element;
+
+import org.msgpack.annotation.Message;
 
 /**
  * 模版
@@ -8,12 +9,14 @@ import org.jdom2.Element;
  * @author liukun
  *         2013-11-16 0:06:02
  */
+
+@Message
 public class NpcTemplet{
 
     /**
      * id
      */
-    private final int id;
+    private  int id = 5;
 
 
     /**
@@ -26,7 +29,7 @@ public class NpcTemplet{
     /**
      * 名称
      */
-    private final String name;
+    private  String name = "abcd";
 
 
     /**
@@ -39,7 +42,7 @@ public class NpcTemplet{
     /**
      * 描述
      */
-    private final String desc;
+    private  String desc = "def";
 
 
     /**
@@ -52,7 +55,7 @@ public class NpcTemplet{
     /**
      * 生命基础值
      */
-    private final int hpBase;
+    private  int hpBase = 34;
 
 
     /**
@@ -65,7 +68,7 @@ public class NpcTemplet{
     /**
      * 物攻
      */
-    private final int phyAttackBase;
+    private  int phyAttackBase;
 
 
     /**
@@ -78,7 +81,7 @@ public class NpcTemplet{
     /**
      * 物防
      */
-    private final int phyDefendBase;
+    private  int phyDefendBase = 45;
 
 
     /**
@@ -91,7 +94,7 @@ public class NpcTemplet{
     /**
      * 魔攻
      */
-    private final int magicAttackBase;
+    private  int magicAttackBase = 90;
 
 
     /**
@@ -104,7 +107,7 @@ public class NpcTemplet{
     /**
      * 魔防
      */
-    private final int magicDefendBase;
+    private  int magicDefendBase;
 
 
     /**
@@ -117,7 +120,7 @@ public class NpcTemplet{
     /**
      * 速度
      */
-    private final int speed;
+    private  int speed = 9898;
 
 
     /**
@@ -130,7 +133,7 @@ public class NpcTemplet{
     /**
      * 躲避
      */
-    private final int dodge;
+    private  int dodge = 78;
 
 
     /**
@@ -143,7 +146,7 @@ public class NpcTemplet{
     /**
      * 暴击
      */
-    private final int crit;
+    private  int crit = 65;
 
 
     /**
@@ -156,7 +159,7 @@ public class NpcTemplet{
     /**
      * 暴击倍数
      */
-    private final int critMultiple;
+    private  int critMultiple;
 
 
     /**
@@ -169,7 +172,7 @@ public class NpcTemplet{
     /**
      * 技能
      */
-    private final int skillTempletId;
+    private  int skillTempletId;
 
 
     /**
@@ -182,7 +185,7 @@ public class NpcTemplet{
     /**
      * 掉落物品
      */
-    private final String dropItem;
+    private String dropItem;
 
 
     /**
@@ -193,21 +196,8 @@ public class NpcTemplet{
     }
 
 
-    public NpcTemplet(Element element){
-        id = Integer.parseInt (element.getChildText ("id").trim ());
-        name = element.getChildText ("name").trim ();
-        desc = element.getChildText ("desc").trim ();
-        hpBase = Integer.parseInt (element.getChildText ("hpBase").trim ());
-        phyAttackBase = Integer.parseInt (element.getChildText ("phyAttackBase").trim ());
-        phyDefendBase = Integer.parseInt (element.getChildText ("phyDefendBase").trim ());
-        magicAttackBase = Integer.parseInt (element.getChildText ("magicAttackBase").trim ());
-        magicDefendBase = Integer.parseInt (element.getChildText ("magicDefendBase").trim ());
-        speed = Integer.parseInt (element.getChildText ("speed").trim ());
-        dodge = Integer.parseInt (element.getChildText ("dodge").trim ());
-        crit = Integer.parseInt (element.getChildText ("crit").trim ());
-        critMultiple = Integer.parseInt (element.getChildText ("critMultiple").trim ());
-        skillTempletId = Integer.parseInt (element.getChildText ("skillTempletId").trim ());
-        dropItem = element.getChildText ("dropItem").trim ();
+    public NpcTemplet(){
+       
 
     }
 

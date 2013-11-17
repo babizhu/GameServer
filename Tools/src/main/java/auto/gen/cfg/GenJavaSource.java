@@ -97,15 +97,14 @@ class GenJavaSource extends AbstractGenJava {
     private void genConstruct() {
         StringBuilder sb = new StringBuilder();
         for (FieldElement fe : fields) {
-            sb.
-                    append(fe.name).append(" = ").
+            sb.append(fe.name).append(" = ").
                     append(parseJavaType(fe)).
+                    append ( fe.name ).
                     append("\").trim()");
             if (!fe.type.equals("String")) {
                 sb.append(" )");
             }
-            sb.
-                    append(";").
+            sb.append(";").
                     append(System.lineSeparator());
         }
 

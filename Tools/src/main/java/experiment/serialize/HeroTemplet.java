@@ -1,6 +1,6 @@
-package org.bbz.game.cfg.fighter;
+package experiment.serialize;
 
-import org.jdom2.Element;
+
 
 /**
  * 模版
@@ -50,12 +50,13 @@ public class HeroTemplet {
 	}
 
 
-	public HeroTemplet( Element element ) {
-		id = Integer.parseInt( element.getChildText("id").trim() );
-name = element.getChildText("name").trim();
-weight = Integer.parseInt( element.getChildText("weight").trim() );
+	public HeroTemplet(HeroTemplet element, int id, String name, int weight) {
+        this.id = id;
 
-	}
+
+        this.name = name;
+        this.weight = weight;
+    }
 
 	@Override
 	public String toString() {
