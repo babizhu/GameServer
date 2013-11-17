@@ -19,31 +19,35 @@ import java.util.Properties;
  */
 public enum Database{
     INSTANCE();
+
     Database(){
         init();
     }
+
     private DataSource dataSource;
     private static final String cfgFile = "./Game/src/main/resources/dbconfig.properties";
-    public void init() {
+
+    public void init(){
         try {
-            InputStream is = new FileInputStream ( cfgFile );
+            InputStream is = new FileInputStream( cfgFile );
             Properties prop = new Properties();
-            prop.load ( is );
-            dataSource = DruidDataSourceFactory.createDataSource ( prop );
+            prop.load( is );
+            dataSource = DruidDataSourceFactory.createDataSource( prop );
         } catch( FileNotFoundException e ) {
-            e.printStackTrace ();
+            e.printStackTrace();
         } catch( IOException e ) {
-            e.printStackTrace ();
+            e.printStackTrace();
         } catch( Exception e ) {
-            e.printStackTrace ();
+            e.printStackTrace();
         }
 
     }
+
     public Connection getConnection(){
         Connection conn = null;
         try {
             conn = dataSource.getConnection();
-        } catch (SQLException e) {
+        } catch( SQLException e ) {
             e.printStackTrace();
         }
         return conn;
@@ -51,42 +55,45 @@ public enum Database{
 
     /**
      * 关闭本次查询所有的打开的资源，除了rs，其余两个资源应该不可能为null，有待考证
-     * @param rs        recordset
-     * @param st        statement
-     * @param con       connection
+     *
+     * @param rs  recordset
+     * @param st  statement
+     * @param con connection
      */
-    public void close( ResultSet rs, Statement st, Connection con ){
+    public void close(ResultSet rs, Statement st, Connection con){
         try {
-            if( rs != null ){
+            if( rs != null ) {
                 rs.close();
             }
-            if( st != null ){
+            if( st != null ) {
                 st.close();
             }
             con.close();
-        } catch (SQLException e) {
+        } catch( SQLException e ) {
             e.printStackTrace();
         }
     }
 
     public static void main(String[] args) throws SQLException{
 
-        long begin = System.nanoTime ();
-        for( int i = 0; i < 1000000; i++ ) {
+        long begin = System.nanoTime();
+        for( int i = 0; i < 500; i++ ) {
 
-            test2 ();
+            test2();
         }
-        System.out.println ( (System.nanoTime () - begin) / 1000000000f );
+        System.out.println( (System.nanoTime() - begin) / 1000000000f );
     }
 
     private static void test2() throws SQLException{
         Connection con = Database.INSTANCE.getConnection();
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT 1");
-        Database.INSTANCE.close (rs, stmt, con);
+        ResultSet rs = stmt.executeQuery( "SELECT 1" );
+        Database.INSTANCE.close( rs, stmt, con );
 
 
     }
+
+    @SuppressWarnings( "UnusedDeclaration" )
     private static void test1(){
 
         Connection con = Database.INSTANCE.getConnection();
@@ -100,14 +107,14 @@ public enum Database{
             pst = con.prepareStatement( sql );
             rs = pst.executeQuery();
 
-            if (rs.next()) {
+            if( rs.next() ) {
                 System.out.println( rs.getLong( 1 ) );
             }
-        } catch (SQLException e) {
+        } catch( SQLException e ) {
             //logger.debug( e.getLocalizedMessage(), e );
             System.out.println( e );
         } finally {
-            Database.INSTANCE.close (null, pst, con);
+            Database.INSTANCE.close( null, pst, con );
         }
     }
 }
