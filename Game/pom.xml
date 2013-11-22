@@ -19,7 +19,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>org.bbz.util.db.Database</mainClass>
+                            <mainClass>org.bbz.util.db.DatabaseUtil</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

@@ -74,7 +74,7 @@ public class Util {
 //            Closer.close(fos);
 //        }
 
-        //System.out.println (path);
+        System.out.println(path);
         FileOutputStream out = null;
 //
 //        FileOutputStream outSTr = null;
@@ -82,7 +82,7 @@ public class Util {
 //        BufferedOutputStream Buff=null;
 //
 //        FileWriter fw = null;
-        //String path = D.SRC_DIR + D.CFG_DIR + packageName + "\\" + className + ".java";
+        //String path = D.SRC_DIR + D.OUTPUT_CFG_DIR + packageName + "\\" + className + ".cfg";
         //System.out.println("real is " + path);
 
         try {

@@ -1,0 +1,20 @@
+/**
+	 * #annotation#
+	 */
+    private #fieldType# #field#;
+
+
+
+	/**
+	 * #annotation#
+	 */
+	public #fieldType# get#methodName#() {
+		return #field#;
+	}
+
+	/**
+     * #annotation#
+     */
+     public void set#methodName#( #fieldType# #field# ) {
+     	this.#field# = #field#;
+     }

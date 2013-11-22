@@ -1,11 +1,14 @@
 package auto.gen.cfg;
 
+import auto.gen.db.IGen;
 import auto.gen.util.D;
+import auto.gen.util.TempletFile;
+import auto.gen.util.TempletType;
 import auto.gen.util.Util;
 import org.apache.poi.ss.usermodel.Sheet;
 
 
-abstract class AbstractGenJava {
+abstract class AbstractGenJava implements IGen {
 
 
     /**
@@ -13,6 +16,9 @@ abstract class AbstractGenJava {
      */
     String packageName;
 
+    /**
+     * 包名，例如game.cfg.fighter.HeroTemplet.java文件的类名HeroTemplet
+     */
     String className;
 
     final Sheet sheet;
@@ -31,13 +37,11 @@ abstract class AbstractGenJava {
 
         className = buildClassName(path[1]);
         packageName = path[0];
-        javaContent = new TempletFile(getTemplet()).getTempletStr();
+        javaContent = new TempletFile(TempletType.JAVA, getTempletFileName()).getTempletStr();
     }
 
 
-    protected abstract void generate();
-
-    protected abstract String getTemplet();
+    protected abstract String getTempletFileName();
 
 
     protected String parseJavaType(FieldElement fe) {
@@ -79,7 +83,7 @@ abstract class AbstractGenJava {
      * 处理自定义的内容，不要误删除了
      */
     protected void writeFile() {
-        String path = D.SRC_DIR + D.CFG_DIR + packageName + "/" + className + ".java";
+        String path = D.SRC_DIR + D.OUTPUT_CFG_DIR + packageName + "/" + className + D.JAVA_FILE_SUFFIXES;
         String manualContent = "";
         if (Util.isExist(path)) {
             String oldData = Util.readFile(path);

@@ -10,28 +10,36 @@ import org.msgpack.annotation.Message;
  */
 
 
-
 @Message
-public class Student{
+public class Student {
 
     public static final int COUNT = 1000000;
-    public static final int LIST_COUNT = 1000000;
+    public static final int LIST_COUNT = 100;
     String name;
     int age;
 
-    public int getAge(){
+    public Student() {
+        //To change body of created methods use File | Settings | File Templates.
+    }
+
+    public int getAge() {
         return age;
     }
 
-    public void setAge(int age){
+    public void setAge(int age) {
         this.age = age;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name;
+    }
+
+    public Student(String name, int age) {
+        this.name = name;
+        this.age = age;
     }
 }

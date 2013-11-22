@@ -17,7 +17,7 @@ import java.util.List;
  */
 
 class FieldElement {
-    String announce;//field的注释
+    String annotation;//field的注释
     String name;
     String type;
     boolean hasClient;
@@ -25,7 +25,7 @@ class FieldElement {
     @Override
     public String toString() {
         return "FieldElement{" +
-                "announce='" + announce + '\'' +
+                "annotation='" + annotation + '\'' +
                 ", name='" + name + '\'' +
                 ", type='" + type + '\'' +
                 ", hasClient=" + hasClient +
@@ -53,7 +53,7 @@ class FieldElimentManager {
         int maxCol = sheet.getRow(0).getLastCellNum();
         for (int col = 0; col < maxCol; col++) {
             FieldElement fe = new FieldElement();
-            fe.announce = sheet.getRow(0).getCell(col).toString();
+            fe.annotation = sheet.getRow(0).getCell(col).toString();
             fe.hasClient = Boolean.parseBoolean(sheet.getRow(1).getCell(col).toString());
             fe.type = sheet.getRow(2).getCell(col).toString();
             fe.name = sheet.getRow(3).getCell(col).toString();

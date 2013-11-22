@@ -1,6 +1,8 @@
 package auto.gen.cfg;
 
 import auto.gen.util.D;
+import auto.gen.util.TempletFile;
+import auto.gen.util.TempletType;
 import auto.gen.util.Util;
 import org.apache.poi.ss.usermodel.Sheet;
 
@@ -30,17 +32,18 @@ class GenJavaSource extends AbstractGenJava {
         fields = new FieldElimentManager(sheet).getFields();
     }
 
-    public void generate() {
+    @Override
+    public void gen() {
         genMisc();
 
-        genFields();
+        genFieldS();
         genToString();
         genConstruct();
         writeFile();
     }
 
     @Override
-    protected String getTemplet() {
+    protected String getTempletFileName() {
         return D.JAVA_TEMPLET_FILE;
     }
 
@@ -66,7 +69,7 @@ class GenJavaSource extends AbstractGenJava {
     }
 
     private void genMisc() {
-        String packageInFile = D.CFG_DIR.replace('/', '.') + packageName;
+        String packageInFile = D.OUTPUT_CFG_DIR.replace('/', '.') + packageName;
         javaContent = javaContent.
                 replace(D.DATE_TAG, DateFormat.getDateTimeInstance().format(new Date())).
                 replace(D.CLASS_NAME_TAG, className).
@@ -74,7 +77,7 @@ class GenJavaSource extends AbstractGenJava {
 
     }
 
-    private void genFields() {
+    private void genFieldS() {
         StringBuilder sb = new StringBuilder();
         for (FieldElement fe : fields) {
             sb.append(genField(fe));
@@ -99,7 +102,7 @@ class GenJavaSource extends AbstractGenJava {
         for (FieldElement fe : fields) {
             sb.append(fe.name).append(" = ").
                     append(parseJavaType(fe)).
-                    append ( fe.name ).
+                    append(fe.name).
                     append("\").trim()");
             if (!fe.type.equals("String")) {
                 sb.append(" )");
@@ -115,9 +118,9 @@ class GenJavaSource extends AbstractGenJava {
 
 
     private String genField(FieldElement fe) {
-        String ret = new TempletFile(D.FIELD_TEMPLET_FILE).getTempletStr();
+        String ret = new TempletFile(TempletType.JAVA, D.FIELD_TEMPLET_FILE).getTempletStr();
         ret = ret
-                .replace(D.ANNOTATION_TAG, fe.announce)
+                .replace(D.ANNOTATION_TAG, fe.annotation)
                 .replace(D.FIELD_TYPE_TAG, fe.type)
                 .replace(D.FIELD_TAG, fe.name)
                 .replace(D.METHOD_NAME_TAG, Util.firstToUpperCase(fe.name));

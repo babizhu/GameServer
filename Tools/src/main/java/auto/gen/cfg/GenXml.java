@@ -8,6 +8,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import java.util.List;
 
 /**
+ * 根据excel文件构建xml文档
  * Created with IntelliJ IDEA.
  * User: Administrator
  * Date: 13-11-5

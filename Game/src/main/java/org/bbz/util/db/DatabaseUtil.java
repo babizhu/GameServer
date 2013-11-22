@@ -12,42 +12,41 @@ import java.util.Properties;
 
 
 /**
- * Created with IntelliJ IDEA.
  * User: liukun
  * Date: 13-11-17
  * Time: 下午5:39
  */
-public enum Database{
+public enum DatabaseUtil {
     INSTANCE();
 
-    Database(){
+    DatabaseUtil() {
         init();
     }
 
     private DataSource dataSource;
     private static final String cfgFile = "./Game/src/main/resources/dbconfig.properties";
 
-    public void init(){
+    private void init() {
         try {
-            InputStream is = new FileInputStream( cfgFile );
+            InputStream is = new FileInputStream(cfgFile);
             Properties prop = new Properties();
-            prop.load( is );
-            dataSource = DruidDataSourceFactory.createDataSource( prop );
-        } catch( FileNotFoundException e ) {
+            prop.load(is);
+            dataSource = DruidDataSourceFactory.createDataSource(prop);
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
-        } catch( IOException e ) {
+        } catch (IOException e) {
             e.printStackTrace();
-        } catch( Exception e ) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
-    public Connection getConnection(){
+    public Connection getConnection() {
         Connection conn = null;
         try {
             conn = dataSource.getConnection();
-        } catch( SQLException e ) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return conn;
@@ -60,43 +59,43 @@ public enum Database{
      * @param st  statement
      * @param con connection
      */
-    public void close(ResultSet rs, Statement st, Connection con){
+    public void close(ResultSet rs, Statement st, Connection con) {
         try {
-            if( rs != null ) {
+            if (rs != null) {
                 rs.close();
             }
-            if( st != null ) {
+            if (st != null) {
                 st.close();
             }
             con.close();
-        } catch( SQLException e ) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public static void main(String[] args) throws SQLException{
+    public static void main(String[] args) throws SQLException {
 
         long begin = System.nanoTime();
-        for( int i = 0; i < 500; i++ ) {
+        for (int i = 0; i < 500; i++) {
 
             test2();
         }
-        System.out.println( (System.nanoTime() - begin) / 1000000000f );
+        System.out.println((System.nanoTime() - begin) / 1000000000f);
     }
 
-    private static void test2() throws SQLException{
-        Connection con = Database.INSTANCE.getConnection();
+    private static void test2() throws SQLException {
+        Connection con = DatabaseUtil.INSTANCE.getConnection();
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery( "SELECT 1" );
-        Database.INSTANCE.close( rs, stmt, con );
+        ResultSet rs = stmt.executeQuery("SELECT 1");
+        DatabaseUtil.INSTANCE.close(rs, stmt, con);
 
 
     }
 
-    @SuppressWarnings( "UnusedDeclaration" )
-    private static void test1(){
+    @SuppressWarnings("UnusedDeclaration")
+    private static void test1() {
 
-        Connection con = Database.INSTANCE.getConnection();
+        Connection con = DatabaseUtil.INSTANCE.getConnection();
 
         PreparedStatement pst = null;
         ResultSet rs;
@@ -104,17 +103,17 @@ public enum Database{
         String sql = "select count(*) from city";
 
         try {
-            pst = con.prepareStatement( sql );
+            pst = con.prepareStatement(sql);
             rs = pst.executeQuery();
 
-            if( rs.next() ) {
-                System.out.println( rs.getLong( 1 ) );
+            if (rs.next()) {
+                System.out.println(rs.getLong(1));
             }
-        } catch( SQLException e ) {
+        } catch (SQLException e) {
             //logger.debug( e.getLocalizedMessage(), e );
-            System.out.println( e );
+            System.out.println(e);
         } finally {
-            Database.INSTANCE.close( null, pst, con );
+            DatabaseUtil.INSTANCE.close(null, pst, con);
         }
     }
 }

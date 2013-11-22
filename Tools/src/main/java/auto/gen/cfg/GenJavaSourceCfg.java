@@ -8,14 +8,14 @@ import java.text.DateFormat;
 import java.util.Date;
 
 /**
- * 通过xml生成相应的配置文件
+ * 通过xml生成相应的配置(config)文件
  * User: Administrator
  * Date: 13-11-5
  * Time: 下午4:41
  * To change this template use File | Settings | File Templates.
  */
 
-class GenJavaSource1 extends AbstractGenJava {
+class GenJavaSourceCfg extends AbstractGenJava {
 
     private final String templetClass;
     private final String xmlNode;
@@ -24,7 +24,7 @@ class GenJavaSource1 extends AbstractGenJava {
      * @param path  仅包括包名和类名
      * @param sheet excel的sheet
      */
-    public GenJavaSource1(String[] path, Sheet sheet) {
+    public GenJavaSourceCfg(String[] path, Sheet sheet) {
         super(path, sheet);
         int pos = className.indexOf("Cfg");
         templetClass = className.substring(0, pos);
@@ -32,7 +32,7 @@ class GenJavaSource1 extends AbstractGenJava {
     }
 
     @Override
-    protected void generate() {
+    public void gen() {
         genMisc();
         //System.out.println( javaContent );
         writeFile();
@@ -40,7 +40,7 @@ class GenJavaSource1 extends AbstractGenJava {
     }
 
     private void genMisc() {
-        String packageInFile = D.CFG_DIR.replace('/', '.') + packageName;
+        String packageInFile = D.OUTPUT_CFG_DIR.replace('/', '.') + packageName;
         //HeroTemplets===>hero
         String xmlPath = templetClass.substring(0, templetClass.indexOf("Templet"));
         xmlPath = Util.firstToLowCase(xmlPath) + ".xml";
@@ -58,7 +58,7 @@ class GenJavaSource1 extends AbstractGenJava {
     }
 
     @Override
-    protected String getTemplet() {
+    protected String getTempletFileName() {
         return D.JAVA_TEMPLET_CFG_FILE;
     }
 
@@ -68,7 +68,7 @@ class GenJavaSource1 extends AbstractGenJava {
     }
 
 //    public static void main(String[] args) {
-//        GenJavaSource1 g = new GenJavaSource1();
+//        GenJavaSourceCfg g = new GenJavaSourceCfg();
 //        g.generate();
 //    }
 
