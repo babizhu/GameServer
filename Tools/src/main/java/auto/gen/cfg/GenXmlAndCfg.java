@@ -1,7 +1,5 @@
 package auto.gen.cfg;
 
-import auto.gen.util.D;
-
 import java.io.File;
 
 /**
@@ -11,7 +9,7 @@ import java.io.File;
  * Time: 下午4:54
  */
 
-public class GenXmlAndCfg {
+class GenXmlAndCfg {
 
 
     void genAll(String path) {
@@ -38,9 +36,6 @@ public class GenXmlAndCfg {
     }
 
     public static void main(String[] args) {
-        System.out.println(System.getProperty("user.dir"));
-        GenXmlAndCfg gen = new GenXmlAndCfg();
 
-        gen.genAll(D.EXECEL_DIR);
     }
 }

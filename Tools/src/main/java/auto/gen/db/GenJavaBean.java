@@ -15,7 +15,7 @@ import java.util.Date;
  * Date: 13-11-21
  * Time: 下午2:54
  */
-public class GenJavaBean implements IGen {
+class GenJavaBean implements IGen {
 
     //    String path = D.SRC_DIR + "gen/db/";
     private final Table table;
@@ -52,9 +52,7 @@ public class GenJavaBean implements IGen {
 
     public static void main(String[] args) {
 
-        Table table = MetaData.INSTANCE.getTableByName("invite");
-        new GenJavaBeanDTO(table).gen();
-        new GenJavaBean(table).gen();
+
     }
 
 }

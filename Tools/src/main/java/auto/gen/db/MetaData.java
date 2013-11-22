@@ -15,7 +15,7 @@ import java.util.List;
  * @version 1.1
  * @date 2011-10-09
  */
-public enum MetaData {
+enum MetaData {
 
     INSTANCE();
 

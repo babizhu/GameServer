@@ -17,7 +17,7 @@ import java.util.Date;
  * Date: 13-11-21
  * Time: 下午2:54
  */
-public class GenJavaBeanDTO implements IGen {
+class GenJavaBeanDTO implements IGen {
 
     //String path = D.SRC_DIR + "gen/db/";
     private final Table table;
