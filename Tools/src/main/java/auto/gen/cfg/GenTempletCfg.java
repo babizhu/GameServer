@@ -15,7 +15,7 @@ import java.util.Date;
  * To change this template use File | Settings | File Templates.
  */
 
-class GenJavaSourceCfg extends AbstractGenJava {
+class GenTempletCfg extends AbstractGenJava {
 
     private final String templetClass;
     private final String xmlNode;
@@ -24,7 +24,7 @@ class GenJavaSourceCfg extends AbstractGenJava {
      * @param path  仅包括包名和类名
      * @param sheet excel的sheet
      */
-    public GenJavaSourceCfg(String[] path, Sheet sheet) {
+    public GenTempletCfg(String[] path, Sheet sheet) {
         super(path, sheet);
         int pos = className.indexOf("Cfg");
         templetClass = className.substring(0, pos);
@@ -34,7 +34,7 @@ class GenJavaSourceCfg extends AbstractGenJava {
     @Override
     public void gen() {
         genMisc();
-        //System.out.println( javaContent );
+        //System.out.println( src );
         writeFile();
 
     }
@@ -46,7 +46,7 @@ class GenJavaSourceCfg extends AbstractGenJava {
         xmlPath = Util.firstToLowCase(xmlPath) + ".xml";
         xmlPath = D.XML_RESOURCE_DIR + packageName + "/" + xmlPath;
 
-        javaContent = javaContent.
+        src = src.
                 replace(D.DATE_TAG, DateFormat.getDateTimeInstance().format(new Date())).
                 replace(D.CLASS_NAME_TAG, className).
                 replace(D.TEPMLET_CLASS_NAME_TAG, templetClass).
@@ -59,16 +59,16 @@ class GenJavaSourceCfg extends AbstractGenJava {
 
     @Override
     protected String getTempletFileName() {
-        return D.JAVA_TEMPLET_CFG_FILE;
+        return "templetCfg.t";
     }
 
     @Override
-    protected String buildClassName(String name) {
+    public String genClassName(String name) {
         return Util.firstToUpperCase(name) + "TempletCfg";
     }
 
 //    public static void main(String[] args) {
-//        GenJavaSourceCfg g = new GenJavaSourceCfg();
+//        GenTempletCfg g = new GenTempletCfg();
 //        g.generate();
 //    }
 

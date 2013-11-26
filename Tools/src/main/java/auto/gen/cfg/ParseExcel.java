@@ -60,8 +60,8 @@ class ParseExcel {
 
     void gen() {
 
-        new GenJavaSource(path, sheet).gen();
-        new GenJavaSourceCfg(path, sheet).gen();
+        new GenTemplet(path, sheet).gen();
+        new GenTempletCfg(path, sheet).gen();
 
         new GenXml(path, sheet).generate();
     }

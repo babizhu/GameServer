@@ -109,4 +109,35 @@ public class Util {
             }
         }
     }
+
+    /**
+     * 主要用于getCount函数中get的生成，重点在于要考虑boolean值的生成
+     * isMax字段相应的get，set函数分别是
+     * isMax()
+     * setMax()
+     */
+    public static String genGet(String paraName) {
+        if (paraName.startsWith("is") || paraName.startsWith("Is")) {
+
+            return Util.firstToLowCase(paraName);
+        } else {
+            return "get" + Util.firstToUpperCase(paraName);
+        }
+    }
+
+
+    /**
+     * 主要用于setCount函数中get的生成，重点在于要考虑boolean值的生成
+     * isMax字段相应的get，set函数分别是
+     * isMax()
+     * setMax()
+     */
+    public static String genSet(String paraName) {
+        if (paraName.startsWith("is") || paraName.startsWith("Is")) {
+
+            return "set" + paraName.substring(2);//去掉is
+        } else {
+            return "set" + Util.firstToUpperCase(paraName);
+        }
+    }
 }

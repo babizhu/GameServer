@@ -6,7 +6,8 @@ package auto.gen.db;
  * Date: 13-11-21
  * Time: 下午2:54
  */
-interface IGen {
+public interface IGen {
 
     void gen();
+
 }

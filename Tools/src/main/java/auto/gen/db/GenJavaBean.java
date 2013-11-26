@@ -1,13 +1,9 @@
 package auto.gen.db;
 
 import auto.gen.db.dto.Table;
-import auto.gen.util.D;
 import auto.gen.util.TempletFile;
 import auto.gen.util.TempletType;
 import auto.gen.util.Util;
-
-import java.text.DateFormat;
-import java.util.Date;
 
 /**
  * Created with IntelliJ IDEA.
@@ -19,34 +15,34 @@ class GenJavaBean implements IGen {
 
     //    String path = D.SRC_DIR + "gen/db/";
     private final Table table;
-    private String javaSource;
+    private String src;
 
     public GenJavaBean(Table table) {
         this.table = table;
-        javaSource = new TempletFile(TempletType.DB, "bean.t").getTempletStr();
+        src = new TempletFile(TempletType.DB, "bean.t").getTempletStr();
     }
 
 
     @Override
     public void gen() {
 
-        javaSource = javaSource.
-                replace(D.PACAKAGE_NAME_TAG, D.OUTPUT_DB_DIR.replace("/", ".")).
-                replace(D.CLASS_NAME_TAG, getClassName()).
-                replace(D.DTO_CLASS_NAME_TAG, getDTOClassName()).
-                replace(D.DATE_TAG, DateFormat.getDateTimeInstance().format(new Date()));
-
-        System.out.println(javaSource);
-        Util.writeFile(D.SRC_DIR + D.OUTPUT_DB_DIR + getClassName() + D.JAVA_FILE_SUFFIXES, javaSource);
+//        src = src.
+//                replace(D.PACAKAGE_NAME_TAG, D.OUTPUT_DB_DIR.replace("/", ".")).
+//                replace(D.CLASS_NAME_TAG, genClassName()).
+//                replace(D.DTO_CLASS_NAME_TAG, genDTOClassName()).
+//                replace(D.DATE_TAG, DateFormat.getDateTimeInstance().format(new Date()));
+//
+//        System.out.println(src);
+//        Util.writeFile(D.SRC_DIR + D.OUTPUT_DB_DIR + "/" + genClassName() + D.JAVA_FILE_SUFFIXES, src);
 
     }
 
-    private String getClassName() {
+    public String genClassName() {
         return Util.firstToUpperCase(table.getName());
     }
 
-    private String getDTOClassName() {
-        return getClassName() + "DTO";
+    private String genDTOClassName() {
+        return genClassName() + "DTO";
     }
 
 

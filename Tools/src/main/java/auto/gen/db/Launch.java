@@ -11,9 +11,9 @@ import auto.gen.db.dto.Table;
  */
 public class Launch {
     public static void main(String[] args) {
-        Table table = MetaData.INSTANCE.getTableByName("invite");
+        Table table = MetaData.INSTANCE.getTableByName("formation");
         new GenJavaBeanDTO(table).gen();
-        new GenJavaBean(table).gen();
+//        new GenJavaBean(table).gen();
         new GenProvider(table).gen();
     }
 }

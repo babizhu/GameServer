@@ -1,20 +1,16 @@
-/**
+    /**
 	 * #annotation#
 	 */
     private #fieldType# #field#;
-
-
-
 	/**
 	 * #annotation#
 	 */
-	public #fieldType# get#methodName#() {
+	public #fieldType# #methodNameGet#() {
 		return #field#;
 	}
-
 	/**
      * #annotation#
      */
-     public void set#methodName#( #fieldType# #field# ) {
+     public void #methodNameSet#( #fieldType# #field# ) {
      	this.#field# = #field#;
      }

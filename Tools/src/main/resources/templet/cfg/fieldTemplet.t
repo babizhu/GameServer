@@ -8,6 +8,6 @@
 	/**
 	 * #annotation#
 	 */
-	public #fieldType# get#methodName#() {
+	public #fieldType# #methodNameGet#() {
 		return #field#;
 	}

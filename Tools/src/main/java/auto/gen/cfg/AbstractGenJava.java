@@ -22,7 +22,7 @@ abstract class AbstractGenJava implements IGen {
     String className;
 
     final Sheet sheet;
-    String javaContent;
+    String src;
 
 
     //private List<FieldElement> fields = new ArrayList<FieldElement>();
@@ -35,9 +35,9 @@ abstract class AbstractGenJava implements IGen {
 
         this.sheet = sheet;
 
-        className = buildClassName(path[1]);
+        className = genClassName(path[1]);
         packageName = path[0];
-        javaContent = new TempletFile(TempletType.JAVA, getTempletFileName()).getTempletStr();
+        src = new TempletFile(TempletType.JAVA, getTempletFileName()).getTempletStr();
     }
 
 
@@ -76,7 +76,7 @@ abstract class AbstractGenJava implements IGen {
      * @param name 文件名
      * @return 类名
      */
-    abstract protected String buildClassName(String name);
+    abstract protected String genClassName(String name);
 
 
     /**
@@ -93,8 +93,8 @@ abstract class AbstractGenJava implements IGen {
                 manualContent = oldData.substring(beginPos + D.MANUAL_WORK_BEGIN.length(), endPos);
             }
         }
-        javaContent = javaContent.replace(D.MANUAL_WORK_TAG, manualContent);//把自定义的内容加上去
-        Util.writeFile(path, javaContent);
+        src = src.replace(D.MANUAL_WORK_TAG, manualContent);//把自定义的内容加上去
+        Util.writeFile(path, src);
     }
 
 }

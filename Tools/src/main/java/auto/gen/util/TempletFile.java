@@ -22,7 +22,7 @@ public class TempletFile {
     }
 
     public static void main(String[] args) {
-        String file = "xTemplet.txt";
+        String file = "xTemplet.t";
         TempletFile t = new TempletFile(TempletType.DB, file);
         System.out.println(t.getTempletStr());
 

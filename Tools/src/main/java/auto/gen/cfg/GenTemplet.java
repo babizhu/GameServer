@@ -19,7 +19,7 @@ import java.util.List;
  */
 
 
-class GenJavaSource extends AbstractGenJava {
+class GenTemplet extends AbstractGenJava {
 
     private List<FieldElement> fields;
 
@@ -27,7 +27,7 @@ class GenJavaSource extends AbstractGenJava {
      * @param path  仅包括包名和类名
      * @param sheet execl的sheet
      */
-    public GenJavaSource(String[] path, Sheet sheet) {
+    public GenTemplet(String[] path, Sheet sheet) {
         super(path, sheet);
         fields = new FieldElimentManager(sheet).getFields();
     }
@@ -44,11 +44,11 @@ class GenJavaSource extends AbstractGenJava {
 
     @Override
     protected String getTempletFileName() {
-        return D.JAVA_TEMPLET_FILE;
+        return "xTemplet.t";
     }
 
     @Override
-    protected String buildClassName(String name) {
+    public String genClassName(String name) {
         return Util.firstToUpperCase(name) + "Templet";
 
     }
@@ -65,12 +65,12 @@ class GenJavaSource extends AbstractGenJava {
             sb.append(temp);
         }
 
-        javaContent = javaContent.replace(D.TO_STRING_TAG, sb.substring(0, sb.length() - 5));
+        src = src.replace(D.TO_STRING_TAG, sb.substring(0, sb.length() - 5));
     }
 
     private void genMisc() {
         String packageInFile = D.OUTPUT_CFG_DIR.replace('/', '.') + packageName;
-        javaContent = javaContent.
+        src = src.
                 replace(D.DATE_TAG, DateFormat.getDateTimeInstance().format(new Date())).
                 replace(D.CLASS_NAME_TAG, className).
                 replace(D.PACAKAGE_NAME_TAG, packageInFile);
@@ -94,7 +94,7 @@ class GenJavaSource extends AbstractGenJava {
 //            }
 //            System.out.println();
 //        }
-        javaContent = javaContent.replace(D.FIELD_AREA_TAG, sb.toString());
+        src = src.replace(D.FIELD_AREA_TAG, sb.toString());
     }
 
     private void genConstruct() {
@@ -112,18 +112,19 @@ class GenJavaSource extends AbstractGenJava {
         }
 
 //        zoneId = Short.parseShort( element.getChildText( "zone_id" ) );
-        javaContent = javaContent.replace(D.CONSTRUCT_TAG, sb.toString());
+        src = src.replace(D.CONSTRUCT_TAG, sb.toString());
 
     }
 
 
     private String genField(FieldElement fe) {
-        String ret = new TempletFile(TempletType.JAVA, D.FIELD_TEMPLET_FILE).getTempletStr();
-        ret = ret
-                .replace(D.ANNOTATION_TAG, fe.annotation)
-                .replace(D.FIELD_TYPE_TAG, fe.type)
-                .replace(D.FIELD_TAG, fe.name)
-                .replace(D.METHOD_NAME_TAG, Util.firstToUpperCase(fe.name));
+        String ret = new TempletFile(TempletType.JAVA, "fieldTemplet.t").getTempletStr();
+        ret = ret.
+                replace(D.ANNOTATION_TAG, fe.annotation).
+                replace(D.FIELD_TYPE_TAG, fe.type).
+                replace(D.FIELD_TAG, fe.name).
+                replace(D.METHOD_NAME_GET_TAG, Util.genGet(fe.name)).
+                replace(D.METHOD_NAME_SET_TAG, Util.genSet(fe.name));
 
         return ret;
     }

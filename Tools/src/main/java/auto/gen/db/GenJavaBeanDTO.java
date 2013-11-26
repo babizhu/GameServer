@@ -21,26 +21,26 @@ class GenJavaBeanDTO implements IGen {
 
     //String path = D.SRC_DIR + "gen/db/";
     private final Table table;
-    private String javaSource;
+    private String src;
 
     public GenJavaBeanDTO(Table table) {
         this.table = table;
-        javaSource = new TempletFile(TempletType.DB, "beanDTO.t").getTempletStr();
+        src = new TempletFile(TempletType.DB, "beanDTO.t").getTempletStr();
     }
 
 
     @Override
     public void gen() {
 
-        javaSource = javaSource.
-                replace(D.PACAKAGE_NAME_TAG, D.OUTPUT_DB_DIR.replace("/", ".")).
-                replace(D.CLASS_NAME_TAG, getClassName()).
+        src = src.
+                replace(D.PACAKAGE_NAME_TAG, D.OUTPUT_DB_DTO_DIR.replace("/", ".")).
+                replace(D.CLASS_NAME_TAG, genClassName()).
                 replace(D.DATE_TAG, DateFormat.getDateTimeInstance().format(new Date())).
                 replace(D.FIELD_AREA_TAG, genFiledS()).
                 replace(D.TO_STRING_TAG, genToString());
 
-        System.out.println(javaSource);
-        Util.writeFile(D.SRC_DIR + D.OUTPUT_DB_DIR + getClassName() + D.JAVA_FILE_SUFFIXES, javaSource);
+        System.out.println(src);
+        Util.writeFile(D.SRC_DIR + D.OUTPUT_DB_DTO_DIR + "/" + genClassName() + D.JAVA_FILE_SUFFIXES, src);
 
     }
 
@@ -54,18 +54,19 @@ class GenJavaBeanDTO implements IGen {
     }
 
     private String genField(Column column) {
-        String ret = new TempletFile(TempletType.DB, D.FIELD_TEMPLET_FILE).getTempletStr();
+        String ret = new TempletFile(TempletType.DB, "fieldTemplet.t").getTempletStr();
         ret = ret.
                 replace(D.ANNOTATION_TAG, column.getAnnotation()).
                 replace(D.FIELD_TYPE_TAG, DataTransUtil.getTypeFromDb(column.getType())).
                 replace(D.FIELD_TAG, column.getName()).
-                replace(D.METHOD_NAME_TAG, Util.firstToUpperCase(column.getName()));
+                replace(D.METHOD_NAME_GET_TAG, Util.genGet(column.getName())).
+                replace(D.METHOD_NAME_SET_TAG, Util.genSet(column.getName()));
 
         return ret;
     }
 
-    private String getClassName() {
-        return Util.firstToUpperCase(table.getName()) + "DTO";
+    public String genClassName() {
+        return Util.firstToUpperCase(table.getName());
     }
 
     /**
