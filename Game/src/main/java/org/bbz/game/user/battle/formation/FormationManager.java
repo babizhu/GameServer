@@ -15,30 +15,23 @@ import java.util.List;
  */
 public class FormationManager {
 
-    private final User user;
+    //    private final User user;
     private List<Formation> formations;
     private final FormationDataProvider db = FormationDataProvider.INSTANCE;
 
     public FormationManager(User user) {
-        this.user = user;
-        init();
+//        this.user = user;
+        this.formations = db.findBy("userName", user.getName());
     }
 
-    /**
-     * 从数据库初始化阵容信息
-     */
-    private void init() {
-        formations = getAllByUser();
-    }
-
-    public Formation add(int templetId) {
-        Formation formation = new Formation();
-        formation.setLevels(1);
-        formation.setTempletId(templetId);
-        formation.setUserName(user.getName());
-        db.add(formation);
-        return formation;
-    }
+//    public Formation add(int templetId) {
+//        Formation formation = new Formation();
+//        formation.setLevels(1);
+//        formation.setTempletId(templetId);
+//        formation.setUserName(user.getName());
+//        db.add(formation);
+//        return formation;
+//    }
 
     public void delete(Formation formation) {
         db.delete(formation);
@@ -54,7 +47,7 @@ public class FormationManager {
     }
 
     private List<Formation> getAllByUser() {
-        return db.findBy("userName", user.getName());
+        return formations;
     }
 
     public static void main(String[] args) {
