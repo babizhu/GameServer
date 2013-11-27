@@ -26,8 +26,7 @@ public enum #className# {
 
 		Connection con = DatabaseUtil.INSTANCE.getConnection();
         PreparedStatement pst = null;
-        String sql = "insert into #tableName# ( #columnName# ) "
-                            + "values ( #columnQuestionMark# )";
+        String sql = "insert into #tableName# ( #columnName# ) values ( #columnQuestionMark# )";
 
 		try {
 			pst = con.prepareStatement( sql );
@@ -37,9 +36,7 @@ public enum #className# {
 			pst.executeUpdate();
 
 		} catch (SQLException e) {
-
-			//throw new SQLRuntimeException(e);
-
+		    e.printStackTrace();
 		} finally {
 
             DatabaseUtil.INSTANCE.close( null, pst, con );
@@ -50,31 +47,76 @@ public enum #className# {
 
             List<#DTOclassName#> list = new ArrayList<#DTOclassName#>();
             Connection con = DatabaseUtil.INSTANCE.getConnection();
-    		PreparedStatement ps = null;
+    		PreparedStatement pst = null;
             ResultSet rs = null;
+            #DTOclassName# #DTOclassParam#;
+    		String sql = String.format("SELECT * FROM #tableName# WHERE %s=?", field);
 
-    		String sql = "select * from #tableName# where " + field + "=?";
     		try {
-    			ps = con.prepareStatement(sql);
-    			ps.setString( 1, condition );
-    			rs = ps.executeQuery();
+    			pst = con.prepareStatement( sql );
+    			pst.setString( 1, condition );
+    			rs = pst.executeQuery();
 
     			while (rs.next()) {
-
-    			CLASS_PARAMETER = mapping(rs);
-
+    			    #DTOclassParam# = mapping(rs);
+    			    list.add( #DTOclassParam# );
     			}
-
     		} catch (SQLException e) {
-
-
-
+    		    e.printStackTrace();
     		} finally {
-
-    			DatabaseUtil.INSTANCE.close( rs, ps, con );
+    			DatabaseUtil.INSTANCE.close( rs, pst, con );
     		}
 
     		return list;
     	}
+
+    	private #DTOclassName# mapping(ResultSet rs) throws SQLException {
+
+        	#DTOclassName# #DTOclassParam# = new #DTOclassName#();
+
+        	#rsMapping#
+
+        	return #DTOclassParam#;
+        }
+
+    public void addAll( List<#DTOclassName#> list ){
+        Connection con = DatabaseUtil.INSTANCE.getConnection();
+        PreparedStatement pst = null;
+        StringBuilder sql = new StringBuilder( "INSERT INTO #tableName# (#columnName#) VALUES " );
+        for (#DTOclassName# #DTOclassParam# : list) {
+            sql.append( "(" );
+            sql.append( #addAll# );
+            sql.append( ")," );
+        }
+        if( list.size() > 0 ){
+           sql.deleteCharAt( sql.length() - 1 );//去掉最后的逗号
+        }
+
+        try {
+    	    pst = con.prepareStatement( sql.toString() );
+    		pst.executeUpdate();
+    	} catch (SQLException e) {
+    	    e.printStackTrace();
+    	} finally {
+            DatabaseUtil.INSTANCE.close( null, pst, con );
+    	}
+    }
+    public void delete( #DTOclassName# #DTOclassParam# ) {
+    	Connection con = DatabaseUtil.INSTANCE.getConnection();
+    	PreparedStatement pst = null;
+    	String sql = "delete from #tableName# where #deleteCondition#";
+
+    	try {
+    		pst = con.prepareStatement(sql);
+            #pstDelete#
+            pst.execute();
+
+     	} catch (SQLException e) {
+        	e.printStackTrace();
+
+    	} finally {
+    	    DatabaseUtil.INSTANCE.close( null, pst, con );
+    	}
+    }
 
 }

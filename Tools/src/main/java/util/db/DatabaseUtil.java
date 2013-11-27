@@ -1,6 +1,5 @@
 package util.db;
 
-
 import com.alibaba.druid.pool.DruidDataSourceFactory;
 
 import javax.sql.DataSource;
@@ -8,7 +7,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 
 
@@ -17,22 +19,21 @@ import java.util.Properties;
  * Date: 13-11-17
  * Time: 下午5:39
  */
-public class DatabaseUtil {
+public enum DatabaseUtil {
+    INSTANCE();
 
-    //    private DatabaseUtil(){};
-    static {
+    DatabaseUtil() {
         init();
     }
 
-    private static DataSource dataSource;
-    //./Game/src/main/resources
+    private DataSource dataSource;
     private static final String cfgFile = "./Tools/src/main/resources/dbconfig.properties";
 
-    private static void init() {
+    private void init() {
         try {
-            InputStream is = new FileInputStream(cfgFile);
+            InputStream inputStream = new FileInputStream(cfgFile);
             Properties prop = new Properties();
-            prop.load(is);
+            prop.load(inputStream);
             dataSource = DruidDataSourceFactory.createDataSource(prop);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -44,7 +45,7 @@ public class DatabaseUtil {
 
     }
 
-    public static Connection getConnection() {
+    public Connection getConnection() {
         Connection conn = null;
         try {
             conn = dataSource.getConnection();
@@ -61,7 +62,7 @@ public class DatabaseUtil {
      * @param st  statement
      * @param con connection
      */
-    public static void close(ResultSet rs, Statement st, Connection con) {
+    public void close(ResultSet rs, Statement st, Connection con) {
         try {
             if (rs != null) {
                 rs.close();
@@ -85,11 +86,12 @@ public class DatabaseUtil {
         System.out.println((System.nanoTime() - begin) / 1000000000f);
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     private static void test2() throws SQLException {
-        Connection con = DatabaseUtil.getConnection();
-        Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT 1");
-        DatabaseUtil.close(rs, stmt, con);
+//        Connection con = DatabaseUtil.INSTANCE.getConnection();
+//        Statement stmt = con.createStatement();
+//        ResultSet rs = stmt.executeQuery("SELECT 1");
+//        DatabaseUtil.INSTANCE.close(rs, stmt, con);
 
 
     }
@@ -97,25 +99,25 @@ public class DatabaseUtil {
     @SuppressWarnings("UnusedDeclaration")
     private static void test1() {
 
-        Connection con = DatabaseUtil.getConnection();
-
-        PreparedStatement pst = null;
-        ResultSet rs;
-
-        String sql = "select count(*) from city";
-
-        try {
-            pst = con.prepareStatement(sql);
-            rs = pst.executeQuery();
-
-            if (rs.next()) {
-                System.out.println(rs.getLong(1));
-            }
-        } catch (SQLException e) {
-            //logger.debug( e.getLocalizedMessage(), e );
-            System.out.println(e);
-        } finally {
-            DatabaseUtil.close(null, pst, con);
-        }
+//        Connection con = DatabaseUtil.INSTANCE.getConnection();
+//
+//        PreparedStatement pst = null;
+//        ResultSet rs;
+//
+//        String sql = "select count(*) from city";
+//
+//        try {
+//            pst = con.prepareStatement(sql);
+//            rs = pst.executeQuery();
+//
+//            if (rs.next()) {
+//                System.out.println(rs.getLong(1));
+//            }
+//        } catch (SQLException e) {
+//            //logger.debug( e.getLocalizedMessage(), e );
+//            System.out.println(e);
+//        } finally {
+//            DatabaseUtil.INSTANCE.close(null, pst, con);
+//        }
     }
 }

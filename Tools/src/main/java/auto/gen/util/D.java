@@ -57,6 +57,10 @@ public final class D {
     public static final String COLUMN_NAME_TAG = "#columnName#";
     public static final String COLUMN_QUESTION_MARK_TAG = "#columnQuestionMark#";
     public static final String PST_ADD_TAG = "#pstAdd#";
+    public static final String RS_MAPPING_TAG = "#rsMapping#";
+    public static final String ADD_ALL_TAG = "#addAll#";
+    public static final String DELETE_CONDITION_TAG = "#deleteCondition#";
+    public static final String PST_DELETE_TAG = "#pstDelete#";
 
     /**
      * *********************************TAG*****************************
@@ -70,7 +74,6 @@ public final class D {
 //    public static final String FIELD_TEMPLET_FILE = "fieldTemplet.t";
 
     public static final String MANUAL_WORK_BEGIN = "/*自定义代码开始*/";
-
     public static final String JAVA_FILE_SUFFIXES = ".java";
     /**
      * excel文件的head行数

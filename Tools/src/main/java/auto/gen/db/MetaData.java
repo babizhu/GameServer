@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author dengzongrong
  * @version 1.1
- * @date 2011-10-09
+ *          2011-10-09
  */
 enum MetaData {
 
@@ -79,7 +79,7 @@ enum MetaData {
      *         <Table>
      */
     public List<Table> getTables() {
-        Connection con = DatabaseUtil.getConnection();
+        Connection con = DatabaseUtil.INSTANCE.getConnection();
 
         ResultSet rs = null;
         Statement stat = null;
@@ -149,7 +149,7 @@ enum MetaData {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            DatabaseUtil.close(rs, stat, con);
+            DatabaseUtil.INSTANCE.close(rs, stat, con);
 //			Closer.close(rs, stat);
 //			Closer.close(pkrs);
 //			Closer.close(trs);
@@ -163,30 +163,30 @@ enum MetaData {
      * @param tableName 表名
      * @return 由表明和类型组成的LabelDTO的List
      */
-    List<Column> getColumnsByTableName(String tableName) {
-        Connection con = DatabaseUtil.getConnection();
-        List<Column> columnS = null;
-        ResultSet rs = null;
-        Statement stat = null;
-        try {
-            columnS = new ArrayList<Column>();
-            stat = con.createStatement();
-            rs = stat.executeQuery("select * from " + tableName);
-            ResultSetMetaData meta = rs.getMetaData();
-            for (int i = 1; i <= meta.getColumnCount(); i++) {
-                Column label = new Column();
-                label.setName(meta.getColumnLabel(i));
-                label.setType(meta.getColumnType(i));
-                label.setTypeName(meta.getColumnTypeName(i));
-                columnS.add(label);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            DatabaseUtil.close(rs, stat, con);
-        }
-        return columnS;
-    }
+//    List<Column> getColumnsByTableName(String tableName) {
+//        Connection con = DatabaseUtil.INSTANCE.getConnection();
+//        List<Column> columnS = null;
+//        ResultSet rs = null;
+//        Statement stat = null;
+//        try {
+//            columnS = new ArrayList<Column>();
+//            stat = con.createStatement();
+//            rs = stat.executeQuery("select * from " + tableName);
+//            ResultSetMetaData meta = rs.getMetaData();
+//            for (int i = 1; i <= meta.getColumnCount(); i++) {
+//                Column label = new Column();
+//                label.setName(meta.getColumnLabel(i));
+//                label.setType(meta.getColumnType(i));
+//                label.setTypeName(meta.getColumnTypeName(i));
+//                columnS.add(label);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
+//            DatabaseUtil.INSTANCE.close(rs, stat, con);
+//        }
+//        return columnS;
+//    }
 
     /**
      * 根据列名和表名获取该列的详细信息
@@ -196,7 +196,7 @@ enum MetaData {
      * @return LabelDTO
      */
     private Column getColumnByColumnName(String tableName, String columnName) {
-        Connection con = DatabaseUtil.getConnection();
+        Connection con = DatabaseUtil.INSTANCE.getConnection();
         Column column = null;
         ResultSet rs = null;
         Statement stat = null;
@@ -213,7 +213,7 @@ enum MetaData {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            DatabaseUtil.close(rs, stat, con);
+            DatabaseUtil.INSTANCE.close(rs, stat, con);
         }
         return column;
     }
@@ -227,7 +227,7 @@ enum MetaData {
      * @return 返回注释
      */
     private String getAnnotation(String tableName, String columnName) {
-        Connection con = DatabaseUtil.getConnection();
+        Connection con = DatabaseUtil.INSTANCE.getConnection();
 
         ResultSet rs = null;
         Statement stat = null;
@@ -242,7 +242,7 @@ enum MetaData {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            DatabaseUtil.close(rs, stat, con);
+            DatabaseUtil.INSTANCE.close(rs, stat, con);
         }
         return null;
     }

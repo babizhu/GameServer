@@ -7,7 +7,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 
 
@@ -28,9 +31,9 @@ public enum DatabaseUtil {
 
     private void init() {
         try {
-            InputStream is = new FileInputStream(cfgFile);
+            InputStream inputStream = new FileInputStream(cfgFile);
             Properties prop = new Properties();
-            prop.load(is);
+            prop.load(inputStream);
             dataSource = DruidDataSourceFactory.createDataSource(prop);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -83,11 +86,12 @@ public enum DatabaseUtil {
         System.out.println((System.nanoTime() - begin) / 1000000000f);
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     private static void test2() throws SQLException {
-        Connection con = DatabaseUtil.INSTANCE.getConnection();
-        Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT 1");
-        DatabaseUtil.INSTANCE.close(rs, stmt, con);
+//        Connection con = DatabaseUtil.INSTANCE.getConnection();
+//        Statement stmt = con.createStatement();
+//        ResultSet rs = stmt.executeQuery("SELECT 1");
+//        DatabaseUtil.INSTANCE.close(rs, stmt, con);
 
 
     }
@@ -95,25 +99,25 @@ public enum DatabaseUtil {
     @SuppressWarnings("UnusedDeclaration")
     private static void test1() {
 
-        Connection con = DatabaseUtil.INSTANCE.getConnection();
-
-        PreparedStatement pst = null;
-        ResultSet rs;
-
-        String sql = "select count(*) from city";
-
-        try {
-            pst = con.prepareStatement(sql);
-            rs = pst.executeQuery();
-
-            if (rs.next()) {
-                System.out.println(rs.getLong(1));
-            }
-        } catch (SQLException e) {
-            //logger.debug( e.getLocalizedMessage(), e );
-            System.out.println(e);
-        } finally {
-            DatabaseUtil.INSTANCE.close(null, pst, con);
-        }
+//        Connection con = DatabaseUtil.INSTANCE.getConnection();
+//
+//        PreparedStatement pst = null;
+//        ResultSet rs;
+//
+//        String sql = "select count(*) from city";
+//
+//        try {
+//            pst = con.prepareStatement(sql);
+//            rs = pst.executeQuery();
+//
+//            if (rs.next()) {
+//                System.out.println(rs.getLong(1));
+//            }
+//        } catch (SQLException e) {
+//            //logger.debug( e.getLocalizedMessage(), e );
+//            System.out.println(e);
+//        } finally {
+//            DatabaseUtil.INSTANCE.close(null, pst, con);
+//        }
     }
 }
