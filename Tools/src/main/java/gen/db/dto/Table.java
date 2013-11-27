@@ -1,4 +1,4 @@
-package auto.gen.db.dto;
+package gen.db.dto;
 
 import java.util.*;
 import java.util.Map.Entry;

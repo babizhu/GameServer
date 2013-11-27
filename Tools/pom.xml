@@ -19,7 +19,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>auto.gen.cfg.GenXmlAndCfg</mainClass>
+                            <mainClass>gen.cfg.GenXmlAndCfg</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

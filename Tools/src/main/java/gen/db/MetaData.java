@@ -1,7 +1,7 @@
-package auto.gen.db;
+package gen.db;
 
-import auto.gen.db.dto.Column;
-import auto.gen.db.dto.Table;
+import gen.db.dto.Column;
+import gen.db.dto.Table;
 import util.db.DatabaseUtil;
 
 import java.sql.*;

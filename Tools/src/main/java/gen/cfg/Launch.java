@@ -1,6 +1,6 @@
-package auto.gen.cfg;
+package gen.cfg;
 
-import auto.gen.util.D;
+import gen.util.D;
 
 /**
  * Created with IntelliJ IDEA.

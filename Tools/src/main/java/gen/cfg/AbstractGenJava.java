@@ -1,10 +1,10 @@
-package auto.gen.cfg;
+package gen.cfg;
 
-import auto.gen.db.IGen;
-import auto.gen.util.D;
-import auto.gen.util.TempletFile;
-import auto.gen.util.TempletType;
-import auto.gen.util.Util;
+import gen.db.IGen;
+import gen.util.D;
+import gen.util.TempletFile;
+import gen.util.TempletType;
+import gen.util.Util;
 import org.apache.poi.ss.usermodel.Sheet;
 
 

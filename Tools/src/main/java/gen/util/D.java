@@ -1,4 +1,4 @@
-package auto.gen.util;
+package gen.util;
 
 /**
  * Created with IntelliJ IDEA.

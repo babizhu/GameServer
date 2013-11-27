@@ -1,4 +1,4 @@
-package auto.gen.db.dto;
+package gen.db.dto;
 
 public class Column {
 

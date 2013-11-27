@@ -1,4 +1,4 @@
-package auto.gen.db.util;
+package gen.db.util;
 
 /**
  * Created with IntelliJ IDEA.

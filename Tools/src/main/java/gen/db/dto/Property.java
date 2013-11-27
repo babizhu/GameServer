@@ -1,7 +1,7 @@
-package auto.gen.db.dto;
+package gen.db.dto;
 
 
-import auto.gen.db.util.BaseTypeConfig;
+import gen.db.util.BaseTypeConfig;
 
 /**
  * 中文

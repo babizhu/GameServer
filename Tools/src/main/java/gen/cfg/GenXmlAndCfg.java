@@ -1,4 +1,4 @@
-package auto.gen.cfg;
+package gen.cfg;
 
 import java.io.File;
 

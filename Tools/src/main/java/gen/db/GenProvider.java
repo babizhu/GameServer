@@ -1,12 +1,12 @@
-package auto.gen.db;
+package gen.db;
 
-import auto.gen.db.dto.Column;
-import auto.gen.db.dto.Table;
-import auto.gen.db.util.DataTransUtil;
-import auto.gen.util.D;
-import auto.gen.util.TempletFile;
-import auto.gen.util.TempletType;
-import auto.gen.util.Util;
+import gen.db.dto.Column;
+import gen.db.dto.Table;
+import gen.db.util.DataTransUtil;
+import gen.util.D;
+import gen.util.TempletFile;
+import gen.util.TempletType;
+import gen.util.Util;
 
 import java.text.DateFormat;
 import java.util.Date;

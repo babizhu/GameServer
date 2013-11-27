@@ -1,6 +1,6 @@
-package auto.gen.db;
+package gen.db;
 
-import auto.gen.db.dto.Table;
+import gen.db.dto.Table;
 
 /**
  * Created with IntelliJ IDEA.
