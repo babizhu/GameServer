@@ -101,10 +101,11 @@ public enum #className# {
             DatabaseUtil.INSTANCE.close( null, pst, con );
     	}
     }
+
     public void delete( #DTOclassName# #DTOclassParam# ) {
     	Connection con = DatabaseUtil.INSTANCE.getConnection();
     	PreparedStatement pst = null;
-    	String sql = "delete from #tableName# where #deleteCondition#";
+    	String sql = "delete from #tableName# where #keyCondition#";
 
     	try {
     		pst = con.prepareStatement(sql);
@@ -118,5 +119,24 @@ public enum #className# {
     	    DatabaseUtil.INSTANCE.close( null, pst, con );
     	}
     }
+
+    public void update( #DTOclassName# #DTOclassParam# ) {
+        	Connection con = DatabaseUtil.INSTANCE.getConnection();
+        	PreparedStatement pst = null;
+
+        	String sql = "update #tableName# set #pstUpdateColumns# where #keyCondition#";
+
+        	try {
+        		pst = con.prepareStatement(sql);
+                #pstUpdate#
+                pst.executeUpdate();
+
+         	} catch (SQLException e) {
+            	e.printStackTrace();
+
+        	} finally {
+        	    DatabaseUtil.INSTANCE.close( null, pst, con );
+        	}
+        }
 
 }

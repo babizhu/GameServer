@@ -9,6 +9,7 @@ import gen.util.TempletType;
 import gen.util.Util;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,10 +31,9 @@ class GenProvider implements IGen {
 
     public GenProvider(Table table) {
         this.table = table;
-        packageName = table.getName();
+        packageName = D.OUTPUT_DB_PROVIDER_DIR.replace("/", ".");
         DTOClassName = Util.firstToUpperCase(table.getName());
         DTOClassParam = Util.firstToLowCase(DTOClassName);
-
         className = genClassName();
         src = new TempletFile(TempletType.DB, "provider.t").getTempletStr();
     }
@@ -42,11 +42,12 @@ class GenProvider implements IGen {
     public void gen() {
         genMisc();
         src = src.replace(D.TABLE_NAME_TAG, table.getName());
-        genSQL();
+        genAdd();
         genPstAdd();
         genMapping();
         genAddAll();
         genDelete();
+        genUpdate();
         System.out.println(src);
 
         Util.writeFile(D.SRC_DIR + D.OUTPUT_DB_PROVIDER_DIR + "/" + genClassName() + D.JAVA_FILE_SUFFIXES, src);
@@ -119,58 +120,80 @@ class GenProvider implements IGen {
         src = src.replace(D.RS_MAPPING_TAG, sb);
     }
 
-    private void genDelete() {
+    private void genKeyCondition() {
         List<Column> keys = table.getKeys();
         StringBuilder sb = new StringBuilder();
         for (Column c : keys) {
             sb.append(c.getName()).append("=? and ");
         }
         if (keys.size() > 0) {
-            sb.delete(sb.length() - 4, sb.length());
+            sb.delete(sb.length() - 5, sb.length());
         }
-        src = src.replace(D.DELETE_CONDITION_TAG, sb).
-                replace(D.PST_DELETE_TAG, genPst(keys));
+        src = src.replace(D.KEY_CONDITION_TAG, sb);
+    }
+
+    private void genDelete() {
+
+        src = src.replace(D.PST_DELETE_TAG, genPst(table.getKeys()));
+    }
+
+    private void genUpdate() {
+        List<Column> list = new ArrayList<Column>(table.getColumns());
+        list.removeAll(table.getKeys());
+
+        StringBuilder sb = new StringBuilder();
+        for (Column c : list) {
+            sb.append(c.getName()).append("=?,");
+        }
+        if (list.size() > 0) {
+            sb.delete(sb.length() - 1, sb.length());
+        }
+
+        StringBuilder pst = new StringBuilder();
+        list.addAll(table.getKeys());
+        pst.append(genPst(list));
+
+        src = src.replace(D.PST_UPDATE_TAG, pst).
+                replace(D.PST_UPDATE_COLUMNS_TAG, sb);
+
     }
 
     /**
-     * 生成sql语句
+     * 生成add sql语句
      * insert into task_base (uname, templet_id, accept_sec, parm) "  + "values (?, ?, ?, ?)";
      */
-    private void genSQL() {
+    private void genAdd() {
         List<Column> columns = table.getColumns();
         StringBuilder sb = new StringBuilder();
         for (Column c : columns) {
             sb.append(c.getName()).append(",");
         }
-        sb.deleteCharAt(sb.length() - 1);//去掉最后的逗号
-        src = src.replace(D.COLUMN_NAME_TAG, sb);
 
-        sb.setLength(0);
+        StringBuilder sb1 = new StringBuilder();
         for (int i = 0; i < columns.size(); i++) {
-            sb.append("?,");
+            sb1.append("?,");
         }
-        sb.deleteCharAt(sb.length() - 1);//去掉最后的逗号
-        src = src.replace(D.COLUMN_QUESTION_MARK_TAG, sb);
+        if (columns.size() > 0) {
+            sb.deleteCharAt(sb.length() - 1);//去掉最后的逗号
+            sb1.deleteCharAt(sb1.length() - 1);//去掉最后的逗号
+        }
+        src = src.replace(D.COLUMN_NAME_TAG, sb).
+                replace(D.COLUMN_QUESTION_MARK_TAG, sb1);
 
     }
 
     private void genMisc() {
         src = src.
-                replace(D.PACAKAGE_NAME_TAG, D.OUTPUT_DB_PROVIDER_DIR.replace("/", ".")).
+                replace(D.PACAKAGE_NAME_TAG, packageName).
                 replace(D.DATE_TAG, DateFormat.getDateTimeInstance().format(new Date())).
                 replace(D.CLASS_NAME_TAG, className).
                 replace(D.DTO_CLASS_NAME_TAG, DTOClassName).
                 replace(D.DTO_CLASS_PARAM_TAG, DTOClassParam);
+        genKeyCondition();
 
     }
 
     private String genClassName() {
         return Util.firstToUpperCase(table.getName()) + "DataProvider";
-    }
-
-    public static void main(String[] args) {
-//        Table table = MetaData.INSTANCE.getTableByName("invite");
-//        new GenProvider(table).gen();
-
     }
 }

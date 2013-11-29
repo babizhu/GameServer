@@ -59,9 +59,10 @@ public final class D {
     public static final String PST_ADD_TAG = "#pstAdd#";
     public static final String RS_MAPPING_TAG = "#rsMapping#";
     public static final String ADD_ALL_TAG = "#addAll#";
-    public static final String DELETE_CONDITION_TAG = "#deleteCondition#";
+    public static final String KEY_CONDITION_TAG = "#keyCondition#";
     public static final String PST_DELETE_TAG = "#pstDelete#";
-
+    public static final String PST_UPDATE_COLUMNS_TAG = "#pstUpdateColumns#";
+    public static final String PST_UPDATE_TAG = "#pstUpdate#";
     /**
      * *********************************TAG*****************************
      */

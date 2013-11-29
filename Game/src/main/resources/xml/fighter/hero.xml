@@ -1,1 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><heros><hero><id>1</id><name>xx</name><weight>23</weight></hero></heros>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<heros>
+    <hero>
+        <id>1</id>
+        <name>xx</name>
+        <weight>23</weight>
+    </hero>
+</heros>

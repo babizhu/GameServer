@@ -14,39 +14,39 @@ import java.util.List;
  * Time: 下午2:18
  */
 public class FormationManager {
-
-    //    private final User user;
     private List<Formation> formations;
     private final FormationDataProvider db = FormationDataProvider.INSTANCE;
 
     public FormationManager(User user) {
-//        this.user = user;
+        //        this.user = user;
         this.formations = db.findBy("userName", user.getName());
     }
 
-//    public Formation add(int templetId) {
-//        Formation formation = new Formation();
-//        formation.setLevels(1);
-//        formation.setTempletId(templetId);
-//        formation.setUserName(user.getName());
-//        db.add(formation);
-//        return formation;
-//    }
+    //    public Formation add(int templetId) {
+    //        Formation formations = new Formation();
+    //        formations.setLevels(1);       
+    //        db.add(formations);
+    //        return formations;
+    //    }
 
-    public void delete(Formation formation) {
-        db.delete(formation);
+    public void update(Formation formations) {
+        db.update(formations);
     }
 
-    public Formation add(Formation formation) {
-        db.add(formation);
-        return formation;
+    public void delete(Formation formations) {
+        db.delete(formations);
+    }
+
+    public Formation add(Formation formations) {
+        db.add(formations);
+        return formations;
     }
 
     public void addAll(List<Formation> list) {
         db.addAll(list);
     }
 
-    private List<Formation> getAllByUser() {
+    private List<Formation> getAll() {
         return formations;
     }
 
@@ -86,11 +86,8 @@ public class FormationManager {
         fm.delete(formation);
 
         begin = System.nanoTime();
-        List<Formation> list1 = fm.getAllByUser();
+        List<Formation> list1 = fm.getAll();
         System.out.println((System.nanoTime() - begin) / 1000000000f);
         System.out.println(list1.size());
-
     }
-
-
 }

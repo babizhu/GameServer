@@ -11,9 +11,10 @@ import gen.db.dto.Table;
  */
 public class Launch {
     public static void main(String[] args) {
-        Table table = MetaData.INSTANCE.getTableByName("formation");
-        new GenJavaBeanDTO(table).gen();
-//        new GenJavaBean(table).gen();
-        new GenProvider(table).gen();
+        for (Table table : MetaData.INSTANCE.getTables()) {
+            new GenJavaBeanDTO(table).gen();
+            //new GenJavaBean(table).gen();
+            new GenProvider(table).gen();
+        }
     }
 }
