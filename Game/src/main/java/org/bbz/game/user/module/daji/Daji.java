@@ -10,8 +10,8 @@ import org.bbz.game.user.module.IModule;
  * Time: 上午10:50
  * To change this template use File | Settings | File Templates.
  */
-public class Daji implements IModule {
-    public Daji(User user) {
-        System.out.println(44);
+public class Daji implements IModule{
+    public Daji( User user ){
+        System.out.println( 44 );
     }
 }

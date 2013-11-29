@@ -8,7 +8,7 @@ import org.jdom2.Element;
  * @author liukun
  *         2013-11-25 15:09:23
  */
-public class DogzTemplet {
+public class DogzTemplet{
 
     /**
      * id
@@ -19,7 +19,7 @@ public class DogzTemplet {
     /**
      * id
      */
-    public int getId() {
+    public int getId(){
         return id;
     }
 
@@ -32,7 +32,7 @@ public class DogzTemplet {
     /**
      * 名称
      */
-    public String getName() {
+    public String getName(){
         return name;
     }
 
@@ -45,7 +45,7 @@ public class DogzTemplet {
     /**
      * 重量
      */
-    public int getWeight() {
+    public int getWeight(){
         return weight;
     }
 
@@ -58,7 +58,7 @@ public class DogzTemplet {
     /**
      * 攻击力
      */
-    public int getAttack() {
+    public int getAttack(){
         return attack;
     }
 
@@ -71,7 +71,7 @@ public class DogzTemplet {
     /**
      * 防御力
      */
-    public int getDefend() {
+    public int getDefend(){
         return defend;
     }
 
@@ -84,23 +84,23 @@ public class DogzTemplet {
     /**
      * 每升一级增加的攻击力
      */
-    public int getAttackStep() {
+    public int getAttackStep(){
         return attackStep;
     }
 
 
-    public DogzTemplet(Element element) {
-        id = Integer.parseInt(element.getChildText("id").trim());
-        name = element.getChildText("name").trim();
-        weight = Integer.parseInt(element.getChildText("weight").trim());
-        attack = Integer.parseInt(element.getChildText("attack").trim());
-        defend = Integer.parseInt(element.getChildText("defend").trim());
-        attackStep = Integer.parseInt(element.getChildText("attackStep").trim());
+    public DogzTemplet( Element element ){
+        id = Integer.parseInt( element.getChildText( "id" ).trim() );
+        name = element.getChildText( "name" ).trim();
+        weight = Integer.parseInt( element.getChildText( "weight" ).trim() );
+        attack = Integer.parseInt( element.getChildText( "attack" ).trim() );
+        defend = Integer.parseInt( element.getChildText( "defend" ).trim() );
+        attackStep = Integer.parseInt( element.getChildText( "attackStep" ).trim() );
 
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return "DogzTemplet [id = " + id + ",name = " + name + ",weight = " + weight + ",attack = " + attack + ",defend = " + defend + ",attackStep = " + attackStep + "]";
     }
 

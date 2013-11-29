@@ -7,6 +7,6 @@ package org.bbz.game.user.module;
  * Time: 上午10:01
  * To change this template use File | Settings | File Templates.
  */
-public interface IModule {
+public interface IModule{
 
 }

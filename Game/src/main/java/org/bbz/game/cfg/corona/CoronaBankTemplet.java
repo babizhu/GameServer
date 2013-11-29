@@ -8,7 +8,7 @@ import org.jdom2.Element;
  * @author liukun
  *         2013-11-25 15:09:23
  */
-public class CoronaBankTemplet {
+public class CoronaBankTemplet{
 
     /**
      * 顺序id
@@ -19,7 +19,7 @@ public class CoronaBankTemplet {
     /**
      * 顺序id
      */
-    public int getId() {
+    public int getId(){
         return id;
     }
 
@@ -32,7 +32,7 @@ public class CoronaBankTemplet {
     /**
      * 类型id
      */
-    public int getTypeId() {
+    public int getTypeId(){
         return typeId;
     }
 
@@ -45,7 +45,7 @@ public class CoronaBankTemplet {
     /**
      * 道具id
      */
-    public int getPropId() {
+    public int getPropId(){
         return propId;
     }
 
@@ -58,7 +58,7 @@ public class CoronaBankTemplet {
     /**
      * 道具名称
      */
-    public String getPropName() {
+    public String getPropName(){
         return propName;
     }
 
@@ -71,7 +71,7 @@ public class CoronaBankTemplet {
     /**
      * 出现该权重
      */
-    public int getAriseWeight() {
+    public int getAriseWeight(){
         return ariseWeight;
     }
 
@@ -84,7 +84,7 @@ public class CoronaBankTemplet {
     /**
      * 道具数量最小值
      */
-    public int getPropMin() {
+    public int getPropMin(){
         return propMin;
     }
 
@@ -97,7 +97,7 @@ public class CoronaBankTemplet {
     /**
      * 道具数量最大值
      */
-    public int getPropMax() {
+    public int getPropMax(){
         return propMax;
     }
 
@@ -110,25 +110,25 @@ public class CoronaBankTemplet {
     /**
      * 服务器获得该物品的最大数量（-1表示不限制数量）
      */
-    public int getGetMax() {
+    public int getGetMax(){
         return getMax;
     }
 
 
-    public CoronaBankTemplet(Element element) {
-        id = Integer.parseInt(element.getChildText("id").trim());
-        typeId = Integer.parseInt(element.getChildText("typeId").trim());
-        propId = Integer.parseInt(element.getChildText("propId").trim());
-        propName = element.getChildText("propName").trim();
-        ariseWeight = Integer.parseInt(element.getChildText("ariseWeight").trim());
-        propMin = Integer.parseInt(element.getChildText("propMin").trim());
-        propMax = Integer.parseInt(element.getChildText("propMax").trim());
-        getMax = Integer.parseInt(element.getChildText("getMax").trim());
+    public CoronaBankTemplet( Element element ){
+        id = Integer.parseInt( element.getChildText( "id" ).trim() );
+        typeId = Integer.parseInt( element.getChildText( "typeId" ).trim() );
+        propId = Integer.parseInt( element.getChildText( "propId" ).trim() );
+        propName = element.getChildText( "propName" ).trim();
+        ariseWeight = Integer.parseInt( element.getChildText( "ariseWeight" ).trim() );
+        propMin = Integer.parseInt( element.getChildText( "propMin" ).trim() );
+        propMax = Integer.parseInt( element.getChildText( "propMax" ).trim() );
+        getMax = Integer.parseInt( element.getChildText( "getMax" ).trim() );
 
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return "CoronaBankTemplet [id = " + id + ",typeId = " + typeId + ",propId = " + propId + ",propName = " + propName + ",ariseWeight = " + ariseWeight + ",propMin = " + propMin + ",propMax = " + propMax + ",getMax = " + getMax + "]";
     }
 

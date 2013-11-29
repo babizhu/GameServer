@@ -7,14 +7,14 @@ package org.bbz.game.user;
  * Time: 上午10:04
  * To change this template use File | Settings | File Templates.
  */
-public class User {
+public class User{
     private String name;
 
-    public String getName() {
+    public String getName(){
         return name;
     }
 
-    public void setName(String name) {
+    public void setName( String name ){
         this.name = name;
     }
 }

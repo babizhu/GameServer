@@ -197,7 +197,7 @@ public class NpcTemplet{
 
 
     public NpcTemplet(){
-       
+
 
     }
 

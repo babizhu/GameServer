@@ -12,22 +12,22 @@ import java.io.IOException;
  */
 
 
-public enum KeyValueDB {
+public enum KeyValueDB{
     INSTANCE;
 
-    <T> void save(String key, T v) {
-        byte[] bytes = Serialize.getInstance().encode(v);
+    <T> void save( String key, T v ){
+        byte[] bytes = Serialize.getInstance().encode( v );
         //TODO 保存到数据库
     }
 
-    <T> T load(String key, Class<T> clazz) {
+    <T> T load( String key, Class<T> clazz ){
         return null;
     }
 
-    void remove(String key) {
+    void remove( String key ){
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main( String[] args ) throws IOException{
         // ISerialize
     }
 }

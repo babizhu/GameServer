@@ -19,37 +19,37 @@ import java.util.Properties;
  * Date: 13-11-17
  * Time: 下午5:39
  */
-public enum DatabaseUtil {
+public enum DatabaseUtil{
     INSTANCE();
 
-    DatabaseUtil() {
+    DatabaseUtil(){
         init();
     }
 
     private DataSource dataSource;
     private static final String cfgFile = "./Game/src/main/resources/dbconfig.properties";
 
-    private void init() {
+    private void init(){
         try {
-            InputStream inputStream = new FileInputStream(cfgFile);
+            InputStream inputStream = new FileInputStream( cfgFile );
             Properties prop = new Properties();
-            prop.load(inputStream);
-            dataSource = DruidDataSourceFactory.createDataSource(prop);
-        } catch (FileNotFoundException e) {
+            prop.load( inputStream );
+            dataSource = DruidDataSourceFactory.createDataSource( prop );
+        } catch( FileNotFoundException e ) {
             e.printStackTrace();
-        } catch (IOException e) {
+        } catch( IOException e ) {
             e.printStackTrace();
-        } catch (Exception e) {
+        } catch( Exception e ) {
             e.printStackTrace();
         }
 
     }
 
-    public Connection getConnection() {
+    public Connection getConnection(){
         Connection conn = null;
         try {
             conn = dataSource.getConnection();
-        } catch (SQLException e) {
+        } catch( SQLException e ) {
             e.printStackTrace();
         }
         return conn;
@@ -62,32 +62,32 @@ public enum DatabaseUtil {
      * @param st  statement
      * @param con connection
      */
-    public void close(ResultSet rs, Statement st, Connection con) {
+    public void close( ResultSet rs, Statement st, Connection con ){
         try {
-            if (rs != null) {
+            if( rs != null ) {
                 rs.close();
             }
-            if (st != null) {
+            if( st != null ) {
                 st.close();
             }
             con.close();
-        } catch (SQLException e) {
+        } catch( SQLException e ) {
             e.printStackTrace();
         }
     }
 
-    public static void main(String[] args) throws SQLException {
+    public static void main( String[] args ) throws SQLException{
 
         long begin = System.nanoTime();
-        for (int i = 0; i < 500; i++) {
+        for( int i = 0; i < 500; i++ ) {
 
             test2();
         }
-        System.out.println((System.nanoTime() - begin) / 1000000000f);
+        System.out.println( (System.nanoTime() - begin) / 1000000000f );
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    private static void test2() throws SQLException {
+    private static void test2() throws SQLException{
 //        Connection con = DatabaseUtil.INSTANCE.getConnection();
 //        Statement stmt = con.createStatement();
 //        ResultSet rs = stmt.executeQuery("SELECT 1");
@@ -97,7 +97,7 @@ public enum DatabaseUtil {
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    private static void test1() {
+    private static void test1(){
 
 //        Connection con = DatabaseUtil.INSTANCE.getConnection();
 //

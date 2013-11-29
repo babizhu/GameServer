@@ -11,15 +11,15 @@ import org.bbz.util.serialize.ISerialize;
  * Date: 13-11-17
  * Time: 下午4:29
  */
-class FastJsonImpl implements ISerialize {
+class FastJsonImpl implements ISerialize{
 
     @Override
-    public <T> byte[] encode(T v) {
-        return JSON.toJSONBytes((Object) v);
+    public <T> byte[] encode( T v ){
+        return JSON.toJSONBytes( (Object) v );
     }
 
     @Override
-    public <T> T decode(byte[] bytes, Class<T> clazz) {
-        return JSON.parseObject(bytes, clazz);
+    public <T> T decode( byte[] bytes, Class<T> clazz ){
+        return JSON.parseObject( bytes, clazz );
     }
 }

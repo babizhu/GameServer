@@ -8,7 +8,7 @@ import org.jdom2.Element;
  * @author liukun
  *         2013-11-25 15:09:23
  */
-public class CoronaTypeTemplet {
+public class CoronaTypeTemplet{
 
     /**
      * 类型id
@@ -19,7 +19,7 @@ public class CoronaTypeTemplet {
     /**
      * 类型id
      */
-    public int getId() {
+    public int getId(){
         return id;
     }
 
@@ -32,7 +32,7 @@ public class CoronaTypeTemplet {
     /**
      * 类型名称
      */
-    public String getTypeNeame() {
+    public String getTypeNeame(){
         return typeNeame;
     }
 
@@ -45,7 +45,7 @@ public class CoronaTypeTemplet {
     /**
      * 权重
      */
-    public int getWeight() {
+    public int getWeight(){
         return weight;
     }
 
@@ -58,7 +58,7 @@ public class CoronaTypeTemplet {
     /**
      * 该类物品最大数量
      */
-    public int getNumberMax() {
+    public int getNumberMax(){
         return numberMax;
     }
 
@@ -71,22 +71,22 @@ public class CoronaTypeTemplet {
     /**
      * 获得该类物品权重
      */
-    public int getGetWeight() {
+    public int getGetWeight(){
         return getWeight;
     }
 
 
-    public CoronaTypeTemplet(Element element) {
-        id = Integer.parseInt(element.getChildText("id").trim());
-        typeNeame = element.getChildText("typeNeame").trim();
-        weight = Integer.parseInt(element.getChildText("weight").trim());
-        numberMax = Integer.parseInt(element.getChildText("numberMax").trim());
-        getWeight = Integer.parseInt(element.getChildText("getWeight").trim());
+    public CoronaTypeTemplet( Element element ){
+        id = Integer.parseInt( element.getChildText( "id" ).trim() );
+        typeNeame = element.getChildText( "typeNeame" ).trim();
+        weight = Integer.parseInt( element.getChildText( "weight" ).trim() );
+        numberMax = Integer.parseInt( element.getChildText( "numberMax" ).trim() );
+        getWeight = Integer.parseInt( element.getChildText( "getWeight" ).trim() );
 
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return "CoronaTypeTemplet [id = " + id + ",typeNeame = " + typeNeame + ",weight = " + weight + ",numberMax = " + numberMax + ",getWeight = " + getWeight + "]";
     }
 

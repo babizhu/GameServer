@@ -9,12 +9,12 @@ import org.bbz.game.user.module.IModule;
  * Date: 13-11-26
  * Time: 上午10:00
  */
-public class FishModule implements IModule {
+public class FishModule implements IModule{
 
     private User user;
 
-    public FishModule(User user) {
+    public FishModule( User user ){
         this.user = user;
-        System.out.println("构造FishModule");
+        System.out.println( "构造FishModule" );
     }
 }

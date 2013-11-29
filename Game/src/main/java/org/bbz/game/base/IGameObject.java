@@ -7,7 +7,7 @@ package org.bbz.game.base;
  * Time: 下午2:10
  * To change this template use File | Settings | File Templates.
  */
-public interface IGameObject {
+public interface IGameObject{
     void saveToDB();
 
     IGameObject loadFromDB();

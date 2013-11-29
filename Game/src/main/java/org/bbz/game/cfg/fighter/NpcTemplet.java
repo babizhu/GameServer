@@ -8,7 +8,7 @@ import org.jdom2.Element;
  * @author liukun
  *         2013-11-25 15:09:23
  */
-public class NpcTemplet {
+public class NpcTemplet{
 
     /**
      * id
@@ -19,7 +19,7 @@ public class NpcTemplet {
     /**
      * id
      */
-    public int getId() {
+    public int getId(){
         return id;
     }
 
@@ -32,7 +32,7 @@ public class NpcTemplet {
     /**
      * 名称
      */
-    public String getName() {
+    public String getName(){
         return name;
     }
 
@@ -45,7 +45,7 @@ public class NpcTemplet {
     /**
      * 描述
      */
-    public String getDesc() {
+    public String getDesc(){
         return desc;
     }
 
@@ -58,7 +58,7 @@ public class NpcTemplet {
     /**
      * 生命基础值
      */
-    public int getHpBase() {
+    public int getHpBase(){
         return hpBase;
     }
 
@@ -71,7 +71,7 @@ public class NpcTemplet {
     /**
      * 物攻
      */
-    public int getPhyAttackBase() {
+    public int getPhyAttackBase(){
         return phyAttackBase;
     }
 
@@ -84,7 +84,7 @@ public class NpcTemplet {
     /**
      * 物防
      */
-    public int getPhyDefendBase() {
+    public int getPhyDefendBase(){
         return phyDefendBase;
     }
 
@@ -97,7 +97,7 @@ public class NpcTemplet {
     /**
      * 魔攻
      */
-    public int getMagicAttackBase() {
+    public int getMagicAttackBase(){
         return magicAttackBase;
     }
 
@@ -110,7 +110,7 @@ public class NpcTemplet {
     /**
      * 魔防
      */
-    public int getMagicDefendBase() {
+    public int getMagicDefendBase(){
         return magicDefendBase;
     }
 
@@ -123,7 +123,7 @@ public class NpcTemplet {
     /**
      * 速度
      */
-    public int getSpeed() {
+    public int getSpeed(){
         return speed;
     }
 
@@ -136,7 +136,7 @@ public class NpcTemplet {
     /**
      * 躲避
      */
-    public int getDodge() {
+    public int getDodge(){
         return dodge;
     }
 
@@ -149,7 +149,7 @@ public class NpcTemplet {
     /**
      * 暴击
      */
-    public int getCrit() {
+    public int getCrit(){
         return crit;
     }
 
@@ -162,7 +162,7 @@ public class NpcTemplet {
     /**
      * 暴击倍数
      */
-    public int getCritMultiple() {
+    public int getCritMultiple(){
         return critMultiple;
     }
 
@@ -175,7 +175,7 @@ public class NpcTemplet {
     /**
      * 技能
      */
-    public int getSkillTempletId() {
+    public int getSkillTempletId(){
         return skillTempletId;
     }
 
@@ -188,31 +188,31 @@ public class NpcTemplet {
     /**
      * 掉落物品
      */
-    public String getDropItem() {
+    public String getDropItem(){
         return dropItem;
     }
 
 
-    public NpcTemplet(Element element) {
-        id = Integer.parseInt(element.getChildText("id").trim());
-        name = element.getChildText("name").trim();
-        desc = element.getChildText("desc").trim();
-        hpBase = Integer.parseInt(element.getChildText("hpBase").trim());
-        phyAttackBase = Integer.parseInt(element.getChildText("phyAttackBase").trim());
-        phyDefendBase = Integer.parseInt(element.getChildText("phyDefendBase").trim());
-        magicAttackBase = Integer.parseInt(element.getChildText("magicAttackBase").trim());
-        magicDefendBase = Integer.parseInt(element.getChildText("magicDefendBase").trim());
-        speed = Integer.parseInt(element.getChildText("speed").trim());
-        dodge = Integer.parseInt(element.getChildText("dodge").trim());
-        crit = Integer.parseInt(element.getChildText("crit").trim());
-        critMultiple = Integer.parseInt(element.getChildText("critMultiple").trim());
-        skillTempletId = Integer.parseInt(element.getChildText("skillTempletId").trim());
-        dropItem = element.getChildText("dropItem").trim();
+    public NpcTemplet( Element element ){
+        id = Integer.parseInt( element.getChildText( "id" ).trim() );
+        name = element.getChildText( "name" ).trim();
+        desc = element.getChildText( "desc" ).trim();
+        hpBase = Integer.parseInt( element.getChildText( "hpBase" ).trim() );
+        phyAttackBase = Integer.parseInt( element.getChildText( "phyAttackBase" ).trim() );
+        phyDefendBase = Integer.parseInt( element.getChildText( "phyDefendBase" ).trim() );
+        magicAttackBase = Integer.parseInt( element.getChildText( "magicAttackBase" ).trim() );
+        magicDefendBase = Integer.parseInt( element.getChildText( "magicDefendBase" ).trim() );
+        speed = Integer.parseInt( element.getChildText( "speed" ).trim() );
+        dodge = Integer.parseInt( element.getChildText( "dodge" ).trim() );
+        crit = Integer.parseInt( element.getChildText( "crit" ).trim() );
+        critMultiple = Integer.parseInt( element.getChildText( "critMultiple" ).trim() );
+        skillTempletId = Integer.parseInt( element.getChildText( "skillTempletId" ).trim() );
+        dropItem = element.getChildText( "dropItem" ).trim();
 
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return "NpcTemplet [id = " + id + ",name = " + name + ",desc = " + desc + ",hpBase = " + hpBase + ",phyAttackBase = " + phyAttackBase + ",phyDefendBase = " + phyDefendBase + ",magicAttackBase = " + magicAttackBase + ",magicDefendBase = " + magicDefendBase + ",speed = " + speed + ",dodge = " + dodge + ",crit = " + crit + ",critMultiple = " + critMultiple + ",skillTempletId = " + skillTempletId + ",dropItem = " + dropItem + "]";
     }
 

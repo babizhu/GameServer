@@ -19,7 +19,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>gen.cfg.GenXmlAndCfg</mainClass>
+                            <mainClass>experiment.calc.Calc</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

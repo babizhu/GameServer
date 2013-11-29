@@ -8,7 +8,7 @@ import org.jdom2.Element;
  * @author liukun
  *         2013-11-25 15:09:23
  */
-public class HeroTemplet {
+public class HeroTemplet{
 
     /**
      * id
@@ -19,7 +19,7 @@ public class HeroTemplet {
     /**
      * id
      */
-    public int getId() {
+    public int getId(){
         return id;
     }
 
@@ -32,7 +32,7 @@ public class HeroTemplet {
     /**
      * 名称
      */
-    public String getName() {
+    public String getName(){
         return name;
     }
 
@@ -45,20 +45,20 @@ public class HeroTemplet {
     /**
      * 重量
      */
-    public int getWeight() {
+    public int getWeight(){
         return weight;
     }
 
 
-    public HeroTemplet(Element element) {
-        id = Integer.parseInt(element.getChildText("id").trim());
-        name = element.getChildText("name").trim();
-        weight = Integer.parseInt(element.getChildText("weight").trim());
+    public HeroTemplet( Element element ){
+        id = Integer.parseInt( element.getChildText( "id" ).trim() );
+        name = element.getChildText( "name" ).trim();
+        weight = Integer.parseInt( element.getChildText( "weight" ).trim() );
 
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return "HeroTemplet [id = " + id + ",name = " + name + ",weight = " + weight + "]";
     }
 

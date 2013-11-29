@@ -12,25 +12,25 @@ import java.io.IOException;
  * Date: 13-11-17
  * Time: 下午4:29
  */
-public class MsgPackImpl implements ISerialize {
+public class MsgPackImpl implements ISerialize{
 
     @Override
-    public <T> byte[] encode(T v) {
+    public <T> byte[] encode( T v ){
         MessagePack msgpack = new MessagePack();
         try {
-            return msgpack.write(v);
-        } catch (IOException e) {
+            return msgpack.write( v );
+        } catch( IOException e ) {
             e.printStackTrace();
         }
         return null;
     }
 
     @Override
-    public <T> T decode(byte[] bytes, Class<T> clazz) {
+    public <T> T decode( byte[] bytes, Class<T> clazz ){
         MessagePack msgpack = new MessagePack();
         try {
-            return msgpack.read(bytes, clazz);
-        } catch (IOException e) {
+            return msgpack.read( bytes, clazz );
+        } catch( IOException e ) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
         return null;

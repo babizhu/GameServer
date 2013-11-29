@@ -30,7 +30,7 @@ public class SerializeJsonSmart{
         System.out.println ((System.nanoTime () - begin) / 1000000000f);
         System.out.println ( jsonString );
     }
-    
+
     public static void main(String[] args){
         Student student = new Student ();
         student.age = 4;
