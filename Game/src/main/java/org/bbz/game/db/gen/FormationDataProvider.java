@@ -14,7 +14,7 @@ import org.bbz.util.db.DatabaseUtil;
  * 该文件自动生成, 禁止手动修改!
  * 模版
  * @author GEN_ROBOT
- * 2013-11-28 14:51:56
+ * 2013-12-11 17:29:20
  */
 public enum FormationDataProvider {
 
@@ -22,19 +22,16 @@ public enum FormationDataProvider {
 
 	//private static AtomicLong idMax = null;
 
-	public void add( Formation formation ) {
-
-		Connection con = DatabaseUtil.INSTANCE.getConnection();
+	public void add( Formation formation, String userName ) {
         PreparedStatement pst = null;
         String sql = "insert into formation ( userName,templetId,levels ) values ( ?,?,? )";
+		Connection con = DatabaseUtil.INSTANCE.getConnection();
 
 		try {
 			pst = con.prepareStatement( sql );
-
 			pst.setString( 1, formation.getUserName() );
 pst.setInt( 2, formation.getTempletId() );
 pst.setInt( 3, formation.getLevels() );
-
 
 			pst.executeUpdate();
 
@@ -49,11 +46,11 @@ pst.setInt( 3, formation.getLevels() );
     public List<Formation> findBy( String field, String condition ) {
 
             List<Formation> list = new ArrayList<Formation>();
-            Connection con = DatabaseUtil.INSTANCE.getConnection();
     		PreparedStatement pst = null;
             ResultSet rs = null;
             Formation formation;
     		String sql = String.format("SELECT * FROM formation WHERE %s=?", field);
+            Connection con = DatabaseUtil.INSTANCE.getConnection();
 
     		try {
     			pst = con.prepareStatement( sql );
@@ -81,12 +78,10 @@ pst.setInt( 3, formation.getLevels() );
 formation.setTempletId( rs.getInt( 2 ) );
 formation.setLevels( rs.getInt( 3 ) );
 
-
         	return formation;
         }
 
-    public void addAll( List<Formation> list ){
-        Connection con = DatabaseUtil.INSTANCE.getConnection();
+    public void addAll( List<Formation> list, String userName ){
         PreparedStatement pst = null;
         StringBuilder sql = new StringBuilder( "INSERT INTO formation (userName,templetId,levels) VALUES " );
         for (Formation formation : list) {
@@ -97,6 +92,7 @@ formation.setLevels( rs.getInt( 3 ) );
         if( list.size() > 0 ){
            sql.deleteCharAt( sql.length() - 1 );//去掉最后的逗号
         }
+        Connection con = DatabaseUtil.INSTANCE.getConnection();
 
         try {
     	    pst = con.prepareStatement( sql.toString() );
@@ -108,10 +104,10 @@ formation.setLevels( rs.getInt( 3 ) );
     	}
     }
 
-    public void delete( Formation formation ) {
-    	Connection con = DatabaseUtil.INSTANCE.getConnection();
+    public void delete( Formation formation, String userName ) {
     	PreparedStatement pst = null;
     	String sql = "delete from formation where templetId=? and userName=?";
+    	Connection con = DatabaseUtil.INSTANCE.getConnection();
 
     	try {
     		pst = con.prepareStatement(sql);
@@ -128,9 +124,9 @@ pst.setString( 2, formation.getUserName() );
     	}
     }
 
-    public void update( Formation formation ) {
-        	Connection con = DatabaseUtil.INSTANCE.getConnection();
+    public void update( Formation formation, String userName ) {
         	PreparedStatement pst = null;
+        	Connection con = DatabaseUtil.INSTANCE.getConnection();
 
         	String sql = "update formation set levels=? where templetId=? and userName=?";
 

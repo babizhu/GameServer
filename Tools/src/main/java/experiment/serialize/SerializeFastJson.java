@@ -24,8 +24,9 @@ public class SerializeFastJson {
             list.add(t);
         }
 
-        test3(list);
+//        test3(list);
 //        test2 ();;
+        test1();
 
 
     }

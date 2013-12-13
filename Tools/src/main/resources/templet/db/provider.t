@@ -22,17 +22,14 @@ public enum #className# {
 
 	//private static AtomicLong idMax = null;
 
-	public void add( #DTOclassName# #DTOclassParam# ) {
-
-		Connection con = DatabaseUtil.INSTANCE.getConnection();
+	public void add( #DTOclassName# #DTOclassParam#, String userName ) {
         PreparedStatement pst = null;
         String sql = "insert into #tableName# ( #columnName# ) values ( #columnQuestionMark# )";
+		Connection con = DatabaseUtil.INSTANCE.getConnection();
 
 		try {
 			pst = con.prepareStatement( sql );
-
 			#pstAdd#
-
 			pst.executeUpdate();
 
 		} catch (SQLException e) {
@@ -46,11 +43,11 @@ public enum #className# {
     public List<#DTOclassName#> findBy( String field, String condition ) {
 
             List<#DTOclassName#> list = new ArrayList<#DTOclassName#>();
-            Connection con = DatabaseUtil.INSTANCE.getConnection();
     		PreparedStatement pst = null;
             ResultSet rs = null;
             #DTOclassName# #DTOclassParam#;
     		String sql = String.format("SELECT * FROM #tableName# WHERE %s=?", field);
+            Connection con = DatabaseUtil.INSTANCE.getConnection();
 
     		try {
     			pst = con.prepareStatement( sql );
@@ -75,12 +72,10 @@ public enum #className# {
         	#DTOclassName# #DTOclassParam# = new #DTOclassName#();
 
         	#rsMapping#
-
         	return #DTOclassParam#;
         }
 
-    public void addAll( List<#DTOclassName#> list ){
-        Connection con = DatabaseUtil.INSTANCE.getConnection();
+    public void addAll( List<#DTOclassName#> list, String userName ){
         PreparedStatement pst = null;
         StringBuilder sql = new StringBuilder( "INSERT INTO #tableName# (#columnName#) VALUES " );
         for (#DTOclassName# #DTOclassParam# : list) {
@@ -91,6 +86,7 @@ public enum #className# {
         if( list.size() > 0 ){
            sql.deleteCharAt( sql.length() - 1 );//去掉最后的逗号
         }
+        Connection con = DatabaseUtil.INSTANCE.getConnection();
 
         try {
     	    pst = con.prepareStatement( sql.toString() );
@@ -102,10 +98,10 @@ public enum #className# {
     	}
     }
 
-    public void delete( #DTOclassName# #DTOclassParam# ) {
-    	Connection con = DatabaseUtil.INSTANCE.getConnection();
+    public void delete( #DTOclassName# #DTOclassParam#, String userName ) {
     	PreparedStatement pst = null;
     	String sql = "delete from #tableName# where #keyCondition#";
+    	Connection con = DatabaseUtil.INSTANCE.getConnection();
 
     	try {
     		pst = con.prepareStatement(sql);
@@ -120,9 +116,9 @@ public enum #className# {
     	}
     }
 
-    public void update( #DTOclassName# #DTOclassParam# ) {
-        	Connection con = DatabaseUtil.INSTANCE.getConnection();
+    public void update( #DTOclassName# #DTOclassParam#, String userName ) {
         	PreparedStatement pst = null;
+        	Connection con = DatabaseUtil.INSTANCE.getConnection();
 
         	String sql = "update #tableName# set #pstUpdateColumns# where #keyCondition#";
 

@@ -6,6 +6,7 @@ import gen.util.TempletFile;
 import gen.util.TempletType;
 import gen.util.Util;
 import org.apache.poi.ss.usermodel.Sheet;
+import util.FileUtil;
 
 
 abstract class AbstractGenJava implements IGen {
@@ -86,7 +87,7 @@ abstract class AbstractGenJava implements IGen {
         String path = D.SRC_DIR + D.OUTPUT_CFG_DIR + packageName + "/" + className + D.JAVA_FILE_SUFFIXES;
         String manualContent = "";
         if (Util.isExist(path)) {
-            String oldData = Util.readFile(path);
+            String oldData = FileUtil.readFile(path);
             int beginPos = oldData.indexOf(D.MANUAL_WORK_BEGIN);
             int endPos = oldData.indexOf(D.MANUAL_WORK_END);
             if (endPos != -1 && beginPos != -1) {
@@ -94,7 +95,7 @@ abstract class AbstractGenJava implements IGen {
             }
         }
         src = src.replace(D.MANUAL_WORK_TAG, manualContent);//把自定义的内容加上去
-        Util.writeFile(path, src);
+        FileUtil.writeFile(path, src);
     }
 
 }

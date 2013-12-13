@@ -7,6 +7,7 @@ import gen.util.D;
 import gen.util.TempletFile;
 import gen.util.TempletType;
 import gen.util.Util;
+import util.FileUtil;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -48,14 +49,15 @@ class GenProvider implements IGen {
         genAddAll();
         genDelete();
         genUpdate();
-        System.out.println(src);
+//        System.out.println(src);
 
-        Util.writeFile(D.SRC_DIR + D.OUTPUT_DB_PROVIDER_DIR + "/" + genClassName() + D.JAVA_FILE_SUFFIXES, src);
+        FileUtil.writeFile(D.SRC_DIR + D.OUTPUT_DB_PROVIDER_DIR + "/" + genClassName() + D.JAVA_FILE_SUFFIXES, src);
     }
 
     private void genPstAdd() {
 
         List<Column> columns = table.getColumns();
+
         src = src.replace(D.PST_ADD_TAG, genPst(columns));
     }
 
@@ -63,10 +65,14 @@ class GenProvider implements IGen {
         StringBuilder sb = new StringBuilder();
         int i = 1;
         for (Column c : columns) {
-            sb.append("pst.set").append(DataTransUtil.getTypeFromDb1(c.getType())).// pst.setShort
-                    append("( ").append(i++).append(", ").//pst.setShort( 1,
-                    append(DTOClassParam).append(".").append(Util.genGet(c.getName())).//pst.setShort( 1, task.getNumber
-                    append("() );\r\n"); //pst.setShort( 1, task.getNumber() );
+            if (c.getName().equals("uname") && table.getKeys().contains(c)) {
+                sb.append(String.format("pst.setString( %d, userName );", i++));
+            } else {
+                sb.append("pst.set").append(DataTransUtil.getTypeFromDb1(c.getType())).// pst.setShort
+                        append("( ").append(i++).append(", ").//pst.setShort( 1,
+                        append(DTOClassParam).append(".").append(Util.genGet(c.getName())).//pst.setShort( 1, task.getNumber
+                        append("() );\r\n"); //pst.setShort( 1, task.getNumber() );
+            }
         }
         return sb.toString();
     }
@@ -90,8 +96,12 @@ class GenProvider implements IGen {
         }
         sb.append("\", ");//String sql = String.format("%s,%s",
         for (Column c : columns) {
-            sb.append(this.DTOClassParam).append(".").//user.
-                    append(Util.genGet(c.getName())).append("(),");//user.getName(),
+            if (c.getName().equals("uname") && table.getKeys().contains(c)) {
+                sb.append("userName,");
+            } else {
+                sb.append(this.DTOClassParam).append(".").//user.
+                        append(Util.genGet(c.getName())).append("(),");//user.getName(),
+            }
         }
         if (columns.size() > 0) {
             sb.deleteCharAt(sb.length() - 1);//去掉最后的逗号
@@ -109,12 +119,17 @@ class GenProvider implements IGen {
 
         //user.setLevel( rs.getShort("level") );
         for (Column c : columns) {
-            sb.append(this.DTOClassParam).append(".").//user.
-                    append(Util.genSet(c.getName())).append("( rs.get").//user.setLevel( rs.get
-                    append(DataTransUtil.getTypeFromDb1(c.getType())).append("( ").//user.setLevel( rs.getShort(
-                    append(i++).//user.setLevel( rs.getShort( 1
-                    //append( "\"").append(c.getName()).append( "\"").考虑效率这里用数字代替，如果有问题，在切换回来常规方式
-                    append(" ) );\r\n");//user.setLevel( rs.getShort(1) );
+            if (c.getName().equals("uname") && table.getKeys().contains(c)) {
+                i++;
+
+            } else {
+                sb.append(this.DTOClassParam).append(".").//user.
+                        append(Util.genSet(c.getName())).append("( rs.get").//user.setLevel( rs.get
+                        append(DataTransUtil.getTypeFromDb1(c.getType())).append("( ").//user.setLevel( rs.getShort(
+                        append(i++).//user.setLevel( rs.getShort( 1
+                        //append( "\"").append(c.getName()).append( "\"").考虑效率这里用数字代替，如果有问题，在切换回来常规方式
+                        append(" ) );\r\n");//user.setLevel( rs.getShort(1) );
+            }
 
         }
         src = src.replace(D.RS_MAPPING_TAG, sb);

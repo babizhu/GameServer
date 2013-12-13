@@ -1,5 +1,7 @@
 package gen.util;
 
+import util.FileUtil;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Administrator
@@ -17,8 +19,8 @@ public class TempletFile {
     }
 
     public String getTempletStr() {
-
-        return Util.readFile(templetPath);
+        return FileUtil.readFile(templetPath);
+//        return Util.readFile(templetPath);
     }
 
     public static void main(String[] args) {

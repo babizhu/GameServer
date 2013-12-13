@@ -16,34 +16,35 @@ import java.util.List;
 public class FormationManager {
     private List<Formation> formations;
     private final FormationDataProvider db = FormationDataProvider.INSTANCE;
+    private final User user;
 
     public FormationManager(User user) {
-        //        this.user = user;
+        this.user = user;
         this.formations = db.findBy("userName", user.getName());
     }
 
     //    public Formation add(int templetId) {
     //        Formation formations = new Formation();
-    //        formations.setLevels(1);       
+    //        formations.setLevels(1);
     //        db.add(formations);
     //        return formations;
     //    }
 
     public void update(Formation formations) {
-        db.update(formations);
+        db.update(formations, user.getName());
     }
 
     public void delete(Formation formations) {
-        db.delete(formations);
+        db.delete(formations, user.getName());
     }
 
     public Formation add(Formation formations) {
-        db.add(formations);
+        db.add(formations, user.getName());
         return formations;
     }
 
     public void addAll(List<Formation> list) {
-        db.addAll(list);
+        db.addAll(list, user.getName());
     }
 
     private List<Formation> getAll() {

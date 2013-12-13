@@ -1,5 +1,6 @@
 package experiment.serialize;
 
+import lombok.ToString;
 import org.msgpack.annotation.Message;
 
 /**
@@ -11,6 +12,7 @@ import org.msgpack.annotation.Message;
 
 
 @Message
+@ToString
 public class Student {
 
     public static final int COUNT = 1000000;

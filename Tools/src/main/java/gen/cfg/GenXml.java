@@ -4,6 +4,7 @@ import gen.util.D;
 import gen.util.Util;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+import util.FileUtil;
 
 import java.util.List;
 
@@ -43,7 +44,7 @@ class GenXml {
         //System.out.println( sb.toString() );
 
         String path = D.XML_RESOURCE_DIR + packageName + "/" + Util.firstToLowCase(className) + ".xml";
-        Util.writeFile(path, sb.toString());
+        FileUtil.writeFile(path, sb.toString());
 //        06911523
 //
 //                主险保单号  51021173898000019940

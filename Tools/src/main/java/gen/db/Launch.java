@@ -7,7 +7,7 @@ import gen.db.dto.Table;
  * User: Administrator
  * Date: 13-11-22
  * Time: 下午6:00
- * 启动类
+ * 包的启动类，通过数据库文件生成相应的dto.java和provider
  */
 public class Launch {
     public static void main(String[] args) {
@@ -15,6 +15,10 @@ public class Launch {
             new GenJavaBeanDTO(table).gen();
             //new GenJavaBean(table).gen();
             new GenProvider(table).gen();
+
+            System.out.println("表[" + table.getName() + "] 处理完毕");
         }
+
+
     }
 }

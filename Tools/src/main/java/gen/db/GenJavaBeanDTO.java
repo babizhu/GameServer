@@ -7,6 +7,7 @@ import gen.util.D;
 import gen.util.TempletFile;
 import gen.util.TempletType;
 import gen.util.Util;
+import util.FileUtil;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -39,8 +40,8 @@ class GenJavaBeanDTO implements IGen {
                 replace(D.FIELD_AREA_TAG, genFiledS()).
                 replace(D.TO_STRING_TAG, genToString());
 
-        System.out.println(src);
-        Util.writeFile(D.SRC_DIR + D.OUTPUT_DB_DTO_DIR + "/" + genClassName() + D.JAVA_FILE_SUFFIXES, src);
+//        System.out.println(src);
+        FileUtil.writeFile(D.SRC_DIR + D.OUTPUT_DB_DTO_DIR + "/" + genClassName() + D.JAVA_FILE_SUFFIXES, src);
 
     }
 
@@ -48,7 +49,9 @@ class GenJavaBeanDTO implements IGen {
         StringBuilder sb = new StringBuilder();
 
         for (Column column : table.getColumns()) {
-            sb.append(genField(column));
+            if (!column.getName().equals("uname") || !table.getKeys().contains(column)) {    //用作主键的uname不生成bean
+                sb.append(genField(column));
+            }
         }
         return sb.toString();
     }
@@ -76,8 +79,10 @@ class GenJavaBeanDTO implements IGen {
 
         StringBuilder sb = new StringBuilder();
         for (Column column : table.getColumns()) {
-            String temp = column.getName() + " = \" + " + column.getName() + " + \",";
-            sb.append(temp);
+            if (!column.getName().equals("uname") || !table.getKeys().contains(column)) {    //用作主键的uname不生成bean
+                String temp = column.getName() + " = \" + " + column.getName() + " + \",";
+                sb.append(temp);
+            }
         }
         return sb.substring(0, sb.length() - 5);
     }

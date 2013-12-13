@@ -6,6 +6,7 @@ import gen.util.TempletType;
 import gen.util.Util;
 
 /**
+ * 此类暂时废弃未使用
  * Created with IntelliJ IDEA.
  * User: Administrator
  * Date: 13-11-21
