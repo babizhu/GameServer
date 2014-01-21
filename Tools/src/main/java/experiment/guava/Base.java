@@ -74,15 +74,30 @@ public class Base {
         multimap.put(1, "a");
         multimap.put(1, "b");
         multimap.put(1, "c");
+        multimap.put(1, "cd");
+        multimap.put(2, "a");
+        multimap.put(2, "b");
+        multimap.put(2, "c");
+
+        for (String s : multimap.values()) {
+            System.out.print(s);
+            System.out.print("-");
+        }
+
 
         List<String> list2 = Lists.newArrayList(multimap.get(1));
+//        multimap.
+//        multimap.asMap().
         Collection<String> list = multimap.get(1);
 //        list.get
         System.out.println(list2);
+        System.out.println("multimap的数量" + multimap.size());
+        System.out.println("multimap中key为1的数量" + multimap.get(1).size());
 //        Multimap<Integer,String> integerStringMultimap = LinkedL
 
 
     }
+
 
     public static void tableTest() {
         Table<Integer, Integer, Student> studentTable = HashBasedTable.create();//年级，班级，学生
@@ -99,10 +114,45 @@ public class Base {
         Map<Integer, Student> colMap = studentTable.column(3);   //得到列集合，所有年级的三班
         System.out.println(rowMap);
         System.out.println(colMap);
+        System.out.println(studentTable);
 
 //        Table<Integer,Integer,List<Student>> s1 = HashBasedTable.create();//年级，班级，学生们
 //        s1.put(1, 1, student);
 
+    }
+
+    /**
+     * 各种插入遍历的顺序
+     * LinkedListMultimap是严格按照插入顺序排序的
+     * ArraylistMultimap则不是
+     */
+    public static void multimapForeach() {
+        Multimap<Integer, String> multimap = LinkedListMultimap.create();
+        multimap.put(1, "ba");
+        multimap.put(2, "2a");
+        multimap.put(4, "4a");
+        multimap.put(3, "3a");
+        multimap.put(21, "21a");
+        multimap.put(12, "12a");
+        multimap.put(1, "fd");
+        multimap.put(1, "a");
+
+        for (String s : multimap.values()) {
+            System.out.println(s);
+        }
+
+
+        for (int i : multimap.keys()) {
+            System.out.println(i);
+        }
+
+        System.out.println("------------------------------");
+        for (int i : multimap.keySet()) {
+            System.out.println(i);
+        }
+
+        List<String> list1 = (List<String>) multimap.values();
+        System.out.println("values11111111111111:" + list1.get(4));
     }
 
     public static void StringTest() {
@@ -133,15 +183,17 @@ public class Base {
             System.out.println(iterator.next());
         }
 
+
     }
 
     public static void main(String[] args) {
-        Immutable();
-        StringTest();
-
-        setsTest();
-        multimapTest();
-
-        tableTest();
+        multimapForeach();
+//        Immutable();
+//        StringTest();
+//
+//        setsTest();
+//        multimapTest();
+//
+//        tableTest();
     }
 }

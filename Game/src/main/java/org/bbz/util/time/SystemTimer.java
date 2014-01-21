@@ -1,4 +1,4 @@
-package org.bbz.util.common;
+package org.bbz.util.time;
 
 
 import java.util.concurrent.Executors;
@@ -10,10 +10,10 @@ import java.util.concurrent.TimeUnit;
  *
  * @author liukun
  */
-public class SystemTimer{
+public class SystemTimer {
     private static final ScheduledExecutorService s = Executors.newSingleThreadScheduledExecutor();
 
-    private SystemTimer(){
+    private SystemTimer() {
     }
 
     ;
@@ -21,40 +21,40 @@ public class SystemTimer{
     private volatile static long time = System.currentTimeMillis();
     private final static int TICK_UNIT = 50;
 
-    private static class TimerTicker implements Runnable{
+    private static class TimerTicker implements Runnable {
 
         @Override
-        public void run(){
+        public void run() {
             time = System.currentTimeMillis();
 
         }
 
     }
 
-    static{
-        s.scheduleAtFixedRate( new TimerTicker(), TICK_UNIT, TICK_UNIT, TimeUnit.MILLISECONDS );
-        Runtime.getRuntime().addShutdownHook( new Thread(){
+    static {
+        s.scheduleAtFixedRate(new TimerTicker(), TICK_UNIT, TICK_UNIT, TimeUnit.MILLISECONDS);
+        Runtime.getRuntime().addShutdownHook(new Thread() {
             @Override
-            public void run(){
+            public void run() {
                 // System.out.println( "system will down");
                 s.shutdown();
 
             }
-        } );
+        });
     }
 
-    public static long currentTimeMillis(){
+    public static long currentTimeMillis() {
         return time;
     }
 
-    public static int currentTimeSecond(){
+    public static int currentTimeSecond() {
         return (int) (time / 1000f);
     }
 
-    public static void main( String[] args ) throws InterruptedException{
-        for( int i = 0; i < 10; i++ ) {
-            System.out.println( currentTimeMillis() );
-            Thread.sleep( 1000 );
+    public static void main(String[] args) throws InterruptedException {
+        for (int i = 0; i < 10; i++) {
+            System.out.println(currentTimeMillis());
+            Thread.sleep(1000);
         }
     }
 }
