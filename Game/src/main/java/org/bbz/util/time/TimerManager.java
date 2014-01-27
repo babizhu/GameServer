@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
  * 到时间之后发出一个事件即可
  * Created by Administrator on 14-1-21.
  */
-public enum TimerManager {
+public enum TimerManager{
     INSTANCE;
 
     private static final int TICK_UNIT = 1;
@@ -55,7 +55,7 @@ public enum TimerManager {
     /**
      * 注册事件
      *
-     * @param obj       要侦听的对象
+     * @param obj 要侦听的对象
      */
     public void register(ITimerTask obj){
         channle.register(obj);
