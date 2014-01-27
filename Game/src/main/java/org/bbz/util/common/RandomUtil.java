@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  * Created by Administrator on 14-1-20.
  */
-public class RandomUtil {
+public class RandomUtil{
 
     private static Random r = new Random();
 
@@ -15,7 +15,7 @@ public class RandomUtil {
      * @param max 随机值上限
      * @return 随机返回的整型数字
      */
-    public static int getInt(int max) {
+    public static int getInt(int max){
         return r.nextInt(max);
     }
 }

@@ -8,22 +8,22 @@ import java.util.List;
  * 各种数据类型之间的转换都集中在此类中
  * 用返回值来进行区分，比如把一个整型数组转成一个Array就应该在Array静态类中，而把此整型数组转换为List则应该放在List中
  */
-public class TransForm {
-    public final static class ArrayType {
+public class TransForm{
+    public final static class ArrayType{
         /**
          * 把用"逗号"分隔的字符串转换为整型数组，例如：<br/>
          * String s = "1,2,3,4,5,6,7,8,9" 输出整型数组[1, 2, 3, 4, 5, 6, 7, 8, 9]<br/>
          *
          * @param input 用"逗号"分隔的字符串
-         * @return 整型数组
+         * @return 返回的整型数组，如果输入字符串长度为0，返回一个长度为0的数组
          */
-        public static int[] toInt(String input) {
-            if (input == null) {
+        public static int[] toInt(String input){
+            if( input == null ) {
                 throw new IllegalArgumentException();
             }
             String[] arr = input.split(",");
             int ret[] = new int[arr.length];
-            for (int i = 0; i < arr.length; i++) {
+            for( int i = 0; i < arr.length; i++ ) {
                 ret[i] = Integer.parseInt(arr[i]);
             }
             return ret;
@@ -31,23 +31,23 @@ public class TransForm {
 
     }
 
-    public static class StringType {
+    public static class StringType{
         /**
          * 把一个整型数组转换为用"逗号"分隔的字符串，例如：<br/>
          * [1, 2, 3, 4, 5, 6, 7, 8, 9] 输出"1,2,3,4,5,6,7,8,9"<br/>
          *
          * @param input 整型数组
-         * @return 字符串
+         * @return 返回的字符串，如果输入长度为0，怎返回空字符串
          */
-        public static String toStr(int[] input) {
-            if (input == null) {
+        public static String toStr(int[] input){
+            if( input == null ) {
                 throw new IllegalArgumentException();
             }
-            if (input.length == 0) {
+            if( input.length == 0 ) {
                 return "";
             }
             StringBuilder ret = new StringBuilder();
-            for (int i : input) {
+            for( int i : input ) {
                 ret.append(i).append(",");
             }
             return ret.deleteCharAt(ret.length() - 1).toString();
@@ -58,17 +58,17 @@ public class TransForm {
          * [1, 2, 3, 4, 5, 6, 7, 8, 9] 输出"1,2,3,4,5,6,7,8,9"<br/>
          *
          * @param input 整型列表
-         * @return 字符串
+         * @return 返回的字符串，如果输入长度为0，怎返回空字符串
          */
-        public static String toStr(List<Integer> input) {
-            if (input == null) {
+        public static String toStr(List<Integer> input){
+            if( input == null ) {
                 throw new IllegalArgumentException();
             }
-            if (input.size() == 0) {
+            if( input.size() == 0 ) {
                 return "";
             }
             StringBuilder ret = new StringBuilder();
-            for (int i : input) {
+            for( int i : input ) {
                 ret.append(i).append(",");
             }
             return ret.deleteCharAt(ret.length() - 1).toString();
@@ -76,21 +76,21 @@ public class TransForm {
 
     }
 
-    public static class ListType {
+    public static class ListType{
         /**
          * 把用"逗号"分隔的字符串转换为一个List，例如：<br/>
          * String s = "1,2,3,4,5,6,7,8,9" 输出整型List<Integer>[1, 2, 3, 4, 5, 6, 7, 8, 9]<br/>
          *
          * @param input 用"逗号"分隔的字符串
-         * @return 整型List
+         * @return 返回的整型List，如果输入字符串长度为0，返回一个长度为0的List
          */
-        public static List<Integer> toList(String input) {
-            if (input == null) {
+        public static List<Integer> toList(String input){
+            if( input == null ) {
                 throw new IllegalArgumentException();
             }
-            String[] arr = input.split(",");
             List<Integer> ret = Lists.newArrayList();
-            for (String anArr : arr) {
+            String[] arr = input.split(",");
+            for( String anArr : arr ) {
                 ret.add(Integer.parseInt(anArr));
             }
             return ret;
@@ -101,16 +101,16 @@ public class TransForm {
          *
          * @param input list
          */
-        public static <T> void mix(List<T> input) {
-            if (input == null) {
+        public static <T> void mix(List<T> input){
+            if( input == null ) {
                 throw new IllegalArgumentException();
             }
             int size = input.size();
-            if (size < 2) {
+            if( size < 2 ) {
                 return;
             }
-            int mixCount = size / 2;
-            for (int i = 0; i < mixCount; i++) {
+            int mixCount = size;
+            for( int i = 0; i < mixCount; i++ ) {
                 int randomIndex = RandomUtil.getInt(size);
                 T temp = input.get(randomIndex);
                 input.set(randomIndex, input.get(i));
@@ -120,6 +120,6 @@ public class TransForm {
 
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
     }
 }

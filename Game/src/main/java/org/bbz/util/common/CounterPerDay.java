@@ -2,6 +2,8 @@ package org.bbz.util.common;
 
 import com.google.common.collect.Maps;
 import org.bbz.game.user.User;
+import org.bbz.util.time.SystemTimer;
+import org.bbz.util.time.TimeUtil;
 
 import java.util.Map;
 
@@ -10,29 +12,33 @@ import java.util.Map;
  * 到0点会自动清除
  * Created by Administrator on 14-1-21.
  */
-public class CounterPerDay {
+public class CounterPerDay{
     Map<CounterKey, Integer> data = Maps.newEnumMap(CounterKey.class);
     private final User user;
     private int today;
 
-    public CounterPerDay(User user) {
-        this.user = user;
 
+    public CounterPerDay(User user){
+        this.user = user;
+        if( !TimeUtil.isToday(today) ) {
+            data.clear();
+            today = SystemTimer.currentTimeSecond();
+        }
     }
 
-    public int get(CounterKey key) {
+    public int get(CounterKey key){
 
         return 0;
     }
 
-    public void set(CounterKey key) {
+    public void set(CounterKey key){
 
     }
 
-    public void add(CounterKey key, int change) {
+    public void add(CounterKey key, int change){
 
         int value = 0;
-        if (data.containsKey(key)) {
+        if( data.containsKey(key) ) {
             value = data.get(key);
         }
         value += change;
@@ -41,7 +47,7 @@ public class CounterPerDay {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         CounterPerDay c = new CounterPerDay(null);
         c.add(null, 20);
     }
