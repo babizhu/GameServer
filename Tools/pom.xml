@@ -38,7 +38,7 @@
 
     <dependencies>
 
-    <dependency>
+        <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
             <version>3.10-beta2</version>
@@ -80,7 +80,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>15.0</version>
+            <version>16.0</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>

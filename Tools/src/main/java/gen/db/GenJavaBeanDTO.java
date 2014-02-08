@@ -18,20 +18,20 @@ import java.util.Date;
  * Date: 13-11-21
  * Time: 下午2:54
  */
-class GenJavaBeanDTO implements IGen {
+class GenJavaBeanDTO implements IGen{
 
     //String path = D.SRC_DIR + "gen/db/";
     private final Table table;
     private String src;
 
-    public GenJavaBeanDTO(Table table) {
+    public GenJavaBeanDTO(Table table){
         this.table = table;
         src = new TempletFile(TempletType.DB, "beanDTO.t").getTempletStr();
     }
 
 
     @Override
-    public void gen() {
+    public void gen(){
 
         src = src.
                 replace(D.PACAKAGE_NAME_TAG, D.OUTPUT_DB_DTO_DIR.replace("/", ".")).
@@ -41,22 +41,22 @@ class GenJavaBeanDTO implements IGen {
                 replace(D.TO_STRING_TAG, genToString());
 
 //        System.out.println(src);
-        FileUtil.writeFile(D.SRC_DIR + D.OUTPUT_DB_DTO_DIR + "/" + genClassName() + D.JAVA_FILE_SUFFIXES, src);
+        FileUtil.writeTextFile(D.SRC_DIR + D.OUTPUT_DB_DTO_DIR + "/" + genClassName() + D.JAVA_FILE_SUFFIXES, src);
 
     }
 
-    private String genFiledS() {
+    private String genFiledS(){
         StringBuilder sb = new StringBuilder();
 
-        for (Column column : table.getColumns()) {
-            if (!column.getName().equals("uname") || !table.getKeys().contains(column)) {    //用作主键的uname不生成bean
+        for( Column column : table.getColumns() ) {
+            if( !column.getName().equals("uname") || !table.getKeys().contains(column) ) {    //用作主键的uname不生成bean
                 sb.append(genField(column));
             }
         }
         return sb.toString();
     }
 
-    private String genField(Column column) {
+    private String genField(Column column){
         String ret = new TempletFile(TempletType.DB, "fieldTemplet.t").getTempletStr();
         ret = ret.
                 replace(D.ANNOTATION_TAG, column.getAnnotation()).
@@ -68,18 +68,18 @@ class GenJavaBeanDTO implements IGen {
         return ret;
     }
 
-    public String genClassName() {
+    public String genClassName(){
         return Util.firstToUpperCase(table.getName());
     }
 
     /**
      * 生成toString方法
      */
-    private String genToString() {
+    private String genToString(){
 
         StringBuilder sb = new StringBuilder();
-        for (Column column : table.getColumns()) {
-            if (!column.getName().equals("uname") || !table.getKeys().contains(column)) {    //用作主键的uname不生成bean
+        for( Column column : table.getColumns() ) {
+            if( !column.getName().equals("uname") || !table.getKeys().contains(column) ) {    //用作主键的uname不生成bean
                 String temp = column.getName() + " = \" + " + column.getName() + " + \",";
                 sb.append(temp);
             }
@@ -87,7 +87,7 @@ class GenJavaBeanDTO implements IGen {
         return sb.substring(0, sb.length() - 5);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
 
         Table table = MetaData.INSTANCE.getTableByName("invite");
         new GenJavaBeanDTO(table).gen();

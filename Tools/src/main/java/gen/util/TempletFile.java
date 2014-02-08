@@ -10,20 +10,20 @@ import util.FileUtil;
  */
 
 
-public class TempletFile {
+public class TempletFile{
     private final String templetPath;
 
-    public TempletFile(TempletType type, String templetPath) {
+    public TempletFile(TempletType type, String templetPath){
 
         this.templetPath = type.getDir() + templetPath;
     }
 
-    public String getTempletStr() {
-        return FileUtil.readFile(templetPath);
-//        return Util.readFile(templetPath);
+    public String getTempletStr(){
+        return FileUtil.readTextFile(templetPath);
+//        return Util.readTextFile(templetPath);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         String file = "xTemplet.t";
         TempletFile t = new TempletFile(TempletType.DB, file);
         System.out.println(t.getTempletStr());

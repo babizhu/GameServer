@@ -9,7 +9,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import util.FileUtil;
 
 
-abstract class AbstractGenJava implements IGen {
+abstract class AbstractGenJava implements IGen{
 
 
     /**
@@ -32,7 +32,7 @@ abstract class AbstractGenJava implements IGen {
      * @param path  仅包括包名和类名
      * @param sheet excel的sheet
      */
-    public AbstractGenJava(String[] path, Sheet sheet) {
+    public AbstractGenJava(String[] path, Sheet sheet){
 
         this.sheet = sheet;
 
@@ -45,25 +45,25 @@ abstract class AbstractGenJava implements IGen {
     protected abstract String getTempletFileName();
 
 
-    protected String parseJavaType(FieldElement fe) {
+    protected String parseJavaType(FieldElement fe){
         String type = fe.type;
-        if (type.equals("int")) {
+        if( type.equals("int") ) {
             return "Integer.parseInt( element.getChildText(\"";
-        } else if (type.equals("short")) {
+        } else if( type.equals("short") ) {
             return "Short.parseShort( element.getChildText(\"";
-        } else if (type.equals("float")) {
+        } else if( type.equals("float") ) {
             return "Float.parseFloat( element.getChildText(\"";
-        } else if (type.equals("String")) {
+        } else if( type.equals("String") ) {
             return "element.getChildText(\"";
-        } else if (type.equals("double")) {
+        } else if( type.equals("double") ) {
             return "Double.parseDouble( element.getChildText(\"";
-        } else if (type.equals("byte")) {
+        } else if( type.equals("byte") ) {
             return "Byte.parseByte( element.getChildText(\"";
-        } else if (type.equals("char")) {
+        } else if( type.equals("char") ) {
             return "(char)" + "Integer.parseInt( element.getChildText(\"";
-        } else if (type.equals("boolean")) {
+        } else if( type.equals("boolean") ) {
             return "Boolean.parseBoolean( element.getChildText(\"";
-        } else if (type.equals("long")) {
+        } else if( type.equals("long") ) {
             return "Long.parseLong( element.getChildText(\"";
         } else {
             return "???";
@@ -83,19 +83,19 @@ abstract class AbstractGenJava implements IGen {
     /**
      * 处理自定义的内容，不要误删除了
      */
-    protected void writeFile() {
+    protected void writeFile(){
         String path = D.SRC_DIR + D.OUTPUT_CFG_DIR + packageName + "/" + className + D.JAVA_FILE_SUFFIXES;
         String manualContent = "";
-        if (Util.isExist(path)) {
-            String oldData = FileUtil.readFile(path);
+        if( Util.isExist(path) ) {
+            String oldData = FileUtil.readTextFile(path);
             int beginPos = oldData.indexOf(D.MANUAL_WORK_BEGIN);
             int endPos = oldData.indexOf(D.MANUAL_WORK_END);
-            if (endPos != -1 && beginPos != -1) {
+            if( endPos != -1 && beginPos != -1 ) {
                 manualContent = oldData.substring(beginPos + D.MANUAL_WORK_BEGIN.length(), endPos);
             }
         }
         src = src.replace(D.MANUAL_WORK_TAG, manualContent);//把自定义的内容加上去
-        FileUtil.writeFile(path, src);
+        FileUtil.writeTextFile(path, src);
     }
 
 }

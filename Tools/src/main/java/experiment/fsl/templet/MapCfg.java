@@ -13,29 +13,29 @@ import java.util.Map;
  * Time: 上午10:32
  * To change this template use File | Settings | File Templates.
  */
-public class MapCfg {
+public class MapCfg{
     private static final String PATH = "";
     private static final Map<Integer, MapTemplet> templets = Maps.newHashMap();
 
 
-    public MapTemplet getMapTemplet(int id) {
+    public MapTemplet getMapTemplet(int id){
         return templets.get(id);
     }
 
-    static {
+    static{
         init();
     }
 
-    private static void init() {
+    private static void init(){
         File dir = new File(PATH);
         File[] files = dir.listFiles();
 
-        if (files == null)
+        if( files == null )
             return;
-        for (File file : files) {
-            if (!file.isDirectory()) {
+        for( File file : files ) {
+            if( !file.isDirectory() ) {
                 String fileName = file.getAbsolutePath();
-                String json = FileUtil.readFile(fileName);
+                String json = FileUtil.readTextFile(fileName);
                 MapTemplet t = new MapTemplet(json);
                 int key = getKey(fileName);
                 templets.put(key, t);
@@ -51,12 +51,12 @@ public class MapCfg {
      * @param fileName 文件名为1.json就应该返回1，
      * @return
      */
-    private static int getKey(String fileName) {
+    private static int getKey(String fileName){
         int pos = fileName.lastIndexOf("\\");
         return Integer.parseInt(fileName.substring(pos));
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         StringBuilder sb = new StringBuilder();
         sb.append("a").append("b");
         sb.deleteCharAt(sb.length() - 1);

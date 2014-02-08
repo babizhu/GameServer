@@ -12,20 +12,20 @@ import gen.util.Util;
  * Date: 13-11-21
  * Time: 下午2:54
  */
-class GenJavaBean implements IGen {
+class GenJavaBean implements IGen{
 
     //    String path = D.SRC_DIR + "gen/db/";
     private final Table table;
     private String src;
 
-    public GenJavaBean(Table table) {
+    public GenJavaBean(Table table){
         this.table = table;
         src = new TempletFile(TempletType.DB, "bean.t").getTempletStr();
     }
 
 
     @Override
-    public void gen() {
+    public void gen(){
 
 //        src = src.
 //                replace(D.PACAKAGE_NAME_TAG, D.OUTPUT_DB_DIR.replace("/", ".")).
@@ -34,20 +34,20 @@ class GenJavaBean implements IGen {
 //                replace(D.DATE_TAG, DateFormat.getDateTimeInstance().format(new Date()));
 //
 //        System.out.println(src);
-//        Util.writeFile(D.SRC_DIR + D.OUTPUT_DB_DIR + "/" + genClassName() + D.JAVA_FILE_SUFFIXES, src);
+//        Util.writeTextFile(D.SRC_DIR + D.OUTPUT_DB_DIR + "/" + genClassName() + D.JAVA_FILE_SUFFIXES, src);
 
     }
 
-    public String genClassName() {
+    public String genClassName(){
         return Util.firstToUpperCase(table.getName());
     }
 
-    private String genDTOClassName() {
+    private String genDTOClassName(){
         return genClassName() + "DTO";
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
 
 
     }

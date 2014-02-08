@@ -17,19 +17,19 @@ import java.util.List;
  * Time: 下午4:11
  * 文件操作的工具类
  */
-public class FileUtil {
+public class FileUtil{
     /**
      * 读取path文件的所有内容到一个List<String>中
      *
      * @param path 要读取的文本路径
      * @return list
      */
-    public static List<String> readList(String path) {
+    public static List<String> readList(String path){
         File file = new File(path);
         List<String> lines = null;
         try {
             lines = Files.readLines(file, Charsets.UTF_8);
-        } catch (IOException e) {
+        } catch( IOException e ) {
             e.printStackTrace();
         }
 
@@ -42,13 +42,13 @@ public class FileUtil {
      * @param path 要读取的文本路径
      * @return 文本内容
      */
-    public static String readFile(String path) {
+    public static String readTextFile(String path){
         String content = null;
         File file = new File(path);
         try {
             content = Files.toString(file, Charset.defaultCharset());
 
-        } catch (IOException e) {
+        } catch( IOException e ) {
             e.printStackTrace();
         }
 
@@ -65,21 +65,21 @@ public class FileUtil {
      *                如果文件已经存在，则会覆盖文件<br/>
      *                如果目录路径不存在会自动创建
      */
-    public static void writeFile(String path, String content) {
+    public static void writeTextFile(String path, String content){
         File file = new File(path);
-        if (!file.exists()) {
+        if( !file.exists() ) {
             File p = new File(path.substring(0, path.lastIndexOf('/')));
             p.mkdirs();
         }
         try {
             Files.write(content, file, Charset.defaultCharset());
-        } catch (IOException e) {
+        } catch( IOException e ) {
             e.printStackTrace();
         }
 
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException{
 
         URL url = Resources.getResource("templet/cfg/fieldTemplet.t");
         String content = Resources.toString(url, Charset.defaultCharset());
@@ -88,8 +88,8 @@ public class FileUtil {
 
 
 //        System.out.println( FileUtil.INSTANCE.readList( "/test.txt" ) );
-//        String c = FileUtil.readFile("c:/1.txt");
-//        FileUtil.writeFile("c:/sd/2.txt", c);
+//        String c = FileUtil.readTextFile("c:/1.txt");
+//        FileUtil.writeTextFile("c:/sd/2.txt", c);
 //        System.out.println( new StringBuilder( "abcd" ).reverse() );
 
 
