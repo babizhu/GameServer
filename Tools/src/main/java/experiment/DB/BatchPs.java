@@ -1,4 +1,4 @@
-package experiment.DB;
+package experiment.db;
 
 import util.db.DatabaseUtil;
 
@@ -13,9 +13,9 @@ import java.sql.SQLException;
  * Time: 上午10:11
  * To change this template use File | Settings | File Templates.
  */
-public class BatchPs {
+public class BatchPs{
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         PreparedStatement pst = null;
         PreparedStatement pst1 = null;
 
@@ -43,7 +43,7 @@ public class BatchPs {
 //            pst1.executeBatch();
             con.commit();
 //            pst.com
-        } catch (SQLException e) {
+        } catch( SQLException e ) {
             e.printStackTrace();
         } finally {
             DatabaseUtil.INSTANCE.close(null, pst, con);

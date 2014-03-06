@@ -6,5 +6,6 @@ package experiment.hashwheel;
 public class PlatformDependent{
     public static boolean isWindows(){
         return false;
+
     }
 }

@@ -10,10 +10,10 @@ import java.util.concurrent.TimeUnit;
  *
  * @author liukun
  */
-public class SystemTimer {
+public class SystemTimer{
     private static final ScheduledExecutorService s = Executors.newSingleThreadScheduledExecutor();
 
-    private SystemTimer() {
+    private SystemTimer(){
     }
 
     ;
@@ -21,21 +21,21 @@ public class SystemTimer {
     private volatile static long time = System.currentTimeMillis();
     private final static int TICK_UNIT = 50;
 
-    private static class TimerTicker implements Runnable {
+    private static class TimerTicker implements Runnable{
 
         @Override
-        public void run() {
+        public void run(){
             time = System.currentTimeMillis();
 
         }
 
     }
 
-    static {
+    static{
         s.scheduleAtFixedRate(new TimerTicker(), TICK_UNIT, TICK_UNIT, TimeUnit.MILLISECONDS);
-        Runtime.getRuntime().addShutdownHook(new Thread() {
+        Runtime.getRuntime().addShutdownHook(new Thread(){
             @Override
-            public void run() {
+            public void run(){
                 // System.out.println( "system will down");
                 s.shutdown();
 
@@ -43,17 +43,17 @@ public class SystemTimer {
         });
     }
 
-    public static long currentTimeMillis() {
+    public static long currentTimeMillis(){
         return time;
     }
 
-    public static int currentTimeSecond() {
-        return (int) (time / 1000f);
+    public static int currentTimeSecond(){
+        return (int) (time / 1000);
     }
 
-    public static void main(String[] args) throws InterruptedException {
-        for (int i = 0; i < 10; i++) {
-            System.out.println(currentTimeMillis());
+    public static void main(String[] args) throws InterruptedException{
+        for( int i = 0; i < 10; i++ ) {
+            System.out.println(/*currentTimeMillis() + */" " + currentTimeSecond());
             Thread.sleep(1000);
         }
     }

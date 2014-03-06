@@ -19,7 +19,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>experiment.calc.Calc</mainClass>
+                            <mainClass>experiment.innerclass.Test</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -46,7 +46,7 @@
         <dependency>
             <groupId>org.msgpack</groupId>
             <artifactId>msgpack</artifactId>
-            <version>0.6.8</version>
+            <version>0.6.9</version>
         </dependency>
 
         <dependency>

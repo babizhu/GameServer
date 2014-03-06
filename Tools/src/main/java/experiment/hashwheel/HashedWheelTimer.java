@@ -16,9 +16,6 @@
 package experiment.hashwheel;
 
 
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
-
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -301,7 +298,7 @@ public class HashedWheelTimer implements ITimer{
 //            leak.close();
 //        }
 
-        Set<ITimeout> unprocessedTimeouts = new HashSet<ITimeout>();
+        Set<ITimeout> unprocessedTimeouts = new HashSet<>();
         for( Set<HashedWheelTimeout> bucket : wheel ) {
             unprocessedTimeouts.addAll(bucket);
             bucket.clear();
@@ -356,7 +353,7 @@ public class HashedWheelTimer implements ITimer{
             // Notify the other threads waiting for the initialization at start().
             startTimeInitialized.countDown();
 
-            List<HashedWheelTimeout> expiredTimeouts = new ArrayList<HashedWheelTimeout>();
+            List<HashedWheelTimeout> expiredTimeouts = new ArrayList<>();
 
             do {
                 final long deadline = waitForNextTick();
@@ -367,8 +364,7 @@ public class HashedWheelTimer implements ITimer{
             } while( workerState.get() == WORKER_STATE_STARTED );
         }
 
-        private void fetchExpiredTimeouts(
-                List<HashedWheelTimeout> expiredTimeouts, long deadline){
+        private void fetchExpiredTimeouts(List<HashedWheelTimeout> expiredTimeouts, long deadline){
 
             // Find the expired timeouts and decrease the round counter
             // if necessary.  Note that we don't send the notification
@@ -559,61 +555,62 @@ public class HashedWheelTimer implements ITimer{
     }
 
     public static void main(String[] args) throws InterruptedException{
-        Map<Integer, String> map = Maps.newHashMap();
-
-        Set<Integer> set = Collections.newSetFromMap(new ConcurrentHashMap());
-        set.add(2);
-        System.out.println(set);
-
-        Set<Integer>[] wheel = new Set[10];
-        for( int i = 0; i < 10; i++ ) {
-            wheel[i] = Sets.newHashSet();
-        }
-        for( int i = 0; i < 10; i++ ) {
-            for( int j = 0; j < i; j++ ) {
-                wheel[i].add(j);
-            }
-        }
-
-        Iterator<Integer> iterator = wheel[0].iterator();
-
-        for( int i = 0; i < 10; i++ ) {
-            for( int n : wheel[i] ) {
-                System.out.print(n + ",");
-            }
-            System.out.println();
-
-        }
-
-        int len = 10;
-        int[] arr = new int[len];
-        for( int i = 0; i < len; i++ ) {
-            arr[i] = i;
-        }
-        int mask = len;// - 1;
-
-        for( int i = 0; i < 11; i++ ) {
-            int index = i % mask;
-            int n = arr[index];
-            System.out.println(n);
-        }
-
-
-        long millis = 1;
-        long t0 = System.currentTimeMillis();
-        long millisLeft = millis;
-        while( millisLeft > 0 ) {
-            Thread.sleep(millisLeft);
-            long t1 = System.currentTimeMillis();
-            millisLeft = millis - (t1 - t0);
-            System.out.println("millisLeft is " + millisLeft);
-        }
-
-        long l = 2;
-
-        System.out.println((21 + 9) / 10 * 10);
-
-        long sleepTimeMs = (100 - 5 + 999999) / 1000000;
+//        Map<Integer, String> map = Maps.newHashMap();
+//
+//        Set set = Collections.newSetFromMap(new ConcurrentHashMap());
+//        set.add(2);
+//        set.add(50 );
+//        System.out.println(set);
+//
+//        Set<Integer>[] wheel = new Set[10];
+//        for( int i = 0; i < 10; i++ ) {
+//            wheel[i] = Sets.newHashSet();
+//        }
+//        for( int i = 0; i < 10; i++ ) {
+//            for( int j = 0; j < i; j++ ) {
+//                wheel[i].add(j);
+//            }
+//        }
+//
+//        Iterator<Integer> iterator = wheel[0].iterator();
+//
+//        for( int i = 0; i < 10; i++ ) {
+//            for( int n : wheel[i] ) {
+//                System.out.print(n + ",");
+//            }
+//            System.out.println();
+//
+//        }
+//
+//        int len = 10;
+//        int[] arr = new int[len];
+//        for( int i = 0; i < len; i++ ) {
+//            arr[i] = i;
+//        }
+//        int mask = len;// - 1;
+//
+//        for( int i = 0; i < 11; i++ ) {
+//            int index = i % mask;
+//            int n = arr[index];
+//            System.out.println(n);
+//        }
+//
+//
+//        long millis = 1;
+//        long t0 = System.currentTimeMillis();
+//        long millisLeft = millis;
+//        while( millisLeft > 0 ) {
+//            Thread.sleep(millisLeft);
+//            long t1 = System.currentTimeMillis();
+//            millisLeft = millis - (t1 - t0);
+//            System.out.println("millisLeft is " + millisLeft);
+//        }
+//
+//        long l = 2;
+//
+//        System.out.println((21 + 9) / 10 * 10);
+//
+//        long sleepTimeMs = (100 - 5 + 999999) / 1000000;
 
     }
 }

@@ -15,11 +15,11 @@ import java.util.List;
  * @version 1.1
  *          2011-10-09
  */
-enum MetaData {
+enum MetaData{
 
     INSTANCE();
 
-    MetaData() {
+    MetaData(){
         getTables();
     }
 
@@ -76,9 +76,9 @@ enum MetaData {
      * 获取该数据库的所有表名
      *
      * @return List
-     *         <Table>
+     * <Table>
      */
-    public List<Table> getTables() {
+    public List<Table> getTables(){
         Connection con = DatabaseUtil.INSTANCE.getConnection();
 
         ResultSet rs = null;
@@ -89,7 +89,7 @@ enum MetaData {
             tables = new ArrayList<Table>();
             DatabaseMetaData meta = con.getMetaData();
             trs = meta.getTables(null, null, null, new String[]{"TABLE"});
-            while (trs.next()) {
+            while( trs.next() ) {
                 Table table = new Table();
 
                 //设置表名
@@ -98,7 +98,7 @@ enum MetaData {
 
                 //设置表主键的集合
                 pkrs = meta.getPrimaryKeys(null, null, trs.getString(3));
-                while (pkrs.next()) {
+                while( pkrs.next() ) {
                     Column key = this.getColumnByColumnName(table.getName(), pkrs.getString(4));
                     //					table.getKeys().add(label);
                     table.addKey(key);
@@ -111,7 +111,7 @@ enum MetaData {
                 rs = stat.executeQuery(String.format("select * from %s limit 1", trs.getString(3)));
                 ResultSetMetaData columnsMeta = rs.getMetaData();
 
-                for (int i = 1; i <= columnsMeta.getColumnCount(); i++) {
+                for( int i = 1; i <= columnsMeta.getColumnCount(); i++ ) {
                     Column column = new Column();
                     column.setName(columnsMeta.getColumnLabel(i));
                     column.setType(columnsMeta.getColumnType(i));
@@ -122,7 +122,7 @@ enum MetaData {
 
 //				Document doc = PropertiesLoader.getDoc();
 //				Element root = doc.getRootElement();
-//				Element db = root.element("DB");
+//				Element db = root.element("db");
 //				Element generate_table = db.element("generate_table");
 //				
 //				List<Element> ts = generate_table.elements("table");
@@ -146,7 +146,7 @@ enum MetaData {
 //				}
             }
 
-        } catch (Exception e) {
+        } catch( Exception e ) {
             e.printStackTrace();
         } finally {
             DatabaseUtil.INSTANCE.close(rs, stat, con);
@@ -195,7 +195,7 @@ enum MetaData {
      * @param tableName  表名
      * @return LabelDTO
      */
-    private Column getColumnByColumnName(String tableName, String columnName) {
+    private Column getColumnByColumnName(String tableName, String columnName){
         Connection con = DatabaseUtil.INSTANCE.getConnection();
         Column column = null;
         ResultSet rs = null;
@@ -210,7 +210,7 @@ enum MetaData {
             column.setName(meta.getColumnLabel(1));
             column.setType(meta.getColumnType(1));
             column.setTypeName(meta.getColumnTypeName(1));
-        } catch (Exception e) {
+        } catch( Exception e ) {
             e.printStackTrace();
         } finally {
             DatabaseUtil.INSTANCE.close(rs, stat, con);
@@ -226,7 +226,7 @@ enum MetaData {
      * @param columnName 字段名
      * @return 返回注释
      */
-    private String getAnnotation(String tableName, String columnName) {
+    private String getAnnotation(String tableName, String columnName){
         Connection con = DatabaseUtil.INSTANCE.getConnection();
 
         ResultSet rs = null;
@@ -239,7 +239,7 @@ enum MetaData {
             rs.next();
 
             return rs.getString(1);
-        } catch (Exception e) {
+        } catch( Exception e ) {
             e.printStackTrace();
         } finally {
             DatabaseUtil.INSTANCE.close(rs, stat, con);
@@ -247,16 +247,16 @@ enum MetaData {
         return null;
     }
 
-    public Table getTableByName(String tableName) {
-        for (Table t : tables) {
-            if (t.getName().equals(tableName)) {
+    public Table getTableByName(String tableName){
+        for( Table t : tables ) {
+            if( t.getName().equals(tableName) ) {
                 return t;
             }
         }
         return null;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         System.out.println("annotation is" + INSTANCE.getAnnotation("invite", "count"));
         System.out.println(INSTANCE.getTables());
     }
