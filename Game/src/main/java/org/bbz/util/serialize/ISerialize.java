@@ -14,7 +14,7 @@ public interface ISerialize{
      * @param v 要序列化的对象
      * @return 二进制数组
      */
-    <T> byte[] encode( T v );
+    <T> byte[] encode(T v);
 
     /**
      * 反序列化
@@ -23,5 +23,7 @@ public interface ISerialize{
      * @param <T>   对象类型
      * @return 对象
      */
-    <T> T decode( byte[] bytes, Class<T> clazz );
+    <T> T decode(byte[] bytes, Class<T> clazz);
+
+
 }

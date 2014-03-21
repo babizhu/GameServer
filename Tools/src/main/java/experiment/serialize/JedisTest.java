@@ -15,13 +15,13 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * Date: 13-11-20
  * Time: 下午12:14
  */
-public class JedisTest {
+public class JedisTest{
 
     private static JedisPool pool = null;
 
-    static {
+    static{
         ResourceBundle bundle = ResourceBundle.getBundle("redis");
-        if (bundle == null) {
+        if( bundle == null ) {
             throw new IllegalArgumentException(
                     "[redis.properties] is not found!");
         }
@@ -35,7 +35,7 @@ public class JedisTest {
         pool = new JedisPool(config, bundle.getString("redis.ip"), Integer.valueOf(bundle.getString("redis.port")));
     }
 
-    static void test1() {
+    static void test1(){
 
         Jedis jedis = pool.getResource();
         String keys = "name";
@@ -57,12 +57,15 @@ public class JedisTest {
         System.out.println(jedis.flushDB());
         System.out.println(jedis.get("jarorwar"));
 
+        //jedis.set
+        //jedis.
+
 // 释放对象池
         pool.returnResource(jedis);
 //        RedisUtil
     }
 
-    public static void testList() {
+    public static void testList(){
         System.out.println("==List==");
         Jedis jedis = pool.getResource();
         try {
@@ -80,7 +83,7 @@ public class JedisTest {
             CopyOnWriteArrayList<String> cl = new CopyOnWriteArrayList<String>(values);
             System.out.println(values);
 
-        } catch (Exception e) {
+        } catch( Exception e ) {
             e.printStackTrace();
         } finally {
             //pool.returnResource(jedis);
@@ -116,7 +119,7 @@ public class JedisTest {
         System.out.println(setValues.getClass());
     }
 
-    private static void testKey() {
+    private static void testKey(){
         Jedis jedis = pool.getResource();
         System.out.println("=============key==========================");
         // 清空数据
@@ -150,7 +153,7 @@ public class JedisTest {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         testList();
     }
 }

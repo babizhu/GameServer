@@ -11,7 +11,7 @@ import org.bbz.util.serialize.ISerialize;
  * Date: 13-11-17
  * Time: 下午4:29
  */
-class FastJsonImpl implements ISerialize{
+public class FastJsonImpl implements ISerialize{
 
     @Override
     public <T> byte[] encode( T v ){

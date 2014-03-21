@@ -1,6 +1,7 @@
 package org.bbz.util.serialize;
 
-import org.bbz.util.serialize.impl.MsgPackImpl;
+import org.bbz.game.user.User;
+import org.bbz.util.serialize.impl.FastJsonImpl;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,12 +14,24 @@ public class Serialize{
         return serialize;
     }
 
-    private static final ISerialize serialize = new MsgPackImpl();
+    //    private static final ISerialize serialize = new MsgPackImpl();
+    private static final ISerialize serialize = new FastJsonImpl();
 
     private Serialize(){
     }
 
     public static void main( String[] args ){
-        Serialize.getInstance().encode( "A" );
+        User user = new User();
+        user.setName("lk");
+
+        Object o = user;
+
+        byte[] encode = Serialize.getInstance().encode(o);
+        System.out.println(encode.length);
+
+
+        User u = Serialize.getInstance().decode(encode, User.class);
+        System.out.println(u.getName());
+
     }
 }

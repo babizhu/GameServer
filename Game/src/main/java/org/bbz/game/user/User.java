@@ -1,5 +1,8 @@
 package org.bbz.game.user;
 
+import lombok.Data;
+import org.msgpack.annotation.Message;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Administrator
@@ -7,14 +10,11 @@ package org.bbz.game.user;
  * Time: 上午10:04
  * To change this template use File | Settings | File Templates.
  */
+
+@Data
+@Message
 public class User{
     private String name;
 
-    public String getName(){
-        return name;
-    }
 
-    public void setName( String name ){
-        this.name = name;
-    }
 }

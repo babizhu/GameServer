@@ -1,6 +1,8 @@
 package experiment.serialize;
 
+import com.google.common.collect.Lists;
 import org.msgpack.MessagePack;
+import org.msgpack.annotation.Message;
 import org.msgpack.packer.Packer;
 
 import java.io.ByteArrayOutputStream;
@@ -28,9 +30,10 @@ public class SerializeMsgPack{
             list.add(t);
         }
 
+//        System.out.println( list);
 //        test3 (list);
-        test1();
-
+//        test1();
+        test4();
 
         // Serialize
     }
@@ -80,6 +83,33 @@ public class SerializeMsgPack{
         System.out.println((System.nanoTime() - begin) / 1000000000f);
     }
 
+    @Message
+    static class ListClass{
+        public List<Animation> list = Lists.newArrayList();
+        public int age;
+
+
+        ListClass(){
+        }
+    }
+
+    private static void test4() throws IOException{
+        ListClass lc = new ListClass();
+        lc.age = 90;
+        lc.list.add(new Animation("lk", 1, new Student("s1", 100)));
+        lc.list.add(new Animation("lkkk", 111, new Student("s01", 100)));
+        MessagePack msMessagePack = new MessagePack();
+        byte[] write = msMessagePack.write(lc);
+
+        ListClass lc1 = msMessagePack.read(write, ListClass.class);
+
+        System.out.println(lc1.list.size());
+        System.out.println(lc1.list);
+        System.out.println(lc1.age);
+        System.out.println(lc1.list.get(1).getStudent().getName());
+
+
+    }
 
     private static void test3(List<NpcTemplet> list) throws IOException{
         int maxLen = 0;
@@ -89,6 +119,20 @@ public class SerializeMsgPack{
         byte[] bytes = msgpack.write(list);
         System.out.println((System.nanoTime() - begin) / 1000000000f);
         System.out.println("maxLen is " + bytes.length);
-        //System.out.println ( jsonString );
+
+
+//        List<NpcTemplet> dst1 = (List<NpcTemplet>) msgpack.read(bytes );
+//
+//        for( NpcTemplet npcTemplet : dst1 ) {
+//
+//            System.out.println( npcTemplet );
+//        }
+//        System.out.println( "size: " + dst1.size() );
+
+//        List<NpcTemplet> dst = Lists.newArrayList();
+//        List<NpcTemplet> read = msgpack.read(bytes,  );
+//        System.out.println( read );
+
+//        msgpack.read()
     }
 }
