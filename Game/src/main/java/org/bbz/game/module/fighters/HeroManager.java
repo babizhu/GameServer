@@ -1,6 +1,7 @@
 package org.bbz.game.module.fighters;
 
 import com.google.common.collect.Sets;
+import com.mongodb.BasicDBObject;
 import lombok.Data;
 import lombok.ToString;
 import org.bbz.game.ClientException;
@@ -62,7 +63,7 @@ public class HeroManager{
             Hero hero = new Hero();
 
             hero.setId( i );
-            hero.setPosition( i * 100 );
+            hero.setPosition( i * 10 );
             hero.setName( "abcd" );
             hero.setExp( RandomUtil.getInt( 1909090 ) );
             Set<Equipment> equipments = Sets.newHashSet();
@@ -77,24 +78,15 @@ public class HeroManager{
         }
     }
 
-    //System.out.println( getAll() );
-
-//        for( Hero hero : getAll() ) {
-//            remove( hero );
-//        }
-
 
     public static void main( String[] args ){
         HeroManager manager = new HeroManager( "lk" );
-        //manager.test();
-        System.out.println( manager.heros );
-        int id = 9;
-        Hero hero = manager.getHeroById( id );
-        System.out.println( hero );
-        //manager.db.remove( id );
-        hero.setExp( 573 );
-        manager.db.update( hero );
-        System.out.println( hero );
+        int id = 324444;
+        System.out.println( manager.db.getCollection().count() );
+        System.out.println( manager.getHeroById( id ) );
+        manager.db.remove( id );
+        System.out.println( manager.getHeroById( id ) );
+        System.out.println( manager.db.getCollection().find( new BasicDBObject( "_id", id ) ).explain() );
 
 
 //        test.removeAll();

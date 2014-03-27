@@ -2,6 +2,7 @@ package org.bbz.game.module.fighters;
 
 import com.google.common.collect.Sets;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.bbz.game.module.equipments.Equipment;
 import org.bbz.util.db.IdentityObj;
 
@@ -13,6 +14,7 @@ import java.util.Set;
  * 玩家手中的英雄
  */
 
+@EqualsAndHashCode(callSuper = false)
 @Data
 public class Hero extends Fighter implements IdentityObj{
 
