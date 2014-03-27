@@ -1,7 +1,8 @@
-package org.bbz.util.serialize.impl;
+package util.serialize.impl;
 
-import org.bbz.util.serialize.ISerialize;
+
 import org.msgpack.MessagePack;
+import util.serialize.ISerialize;
 
 import java.io.IOException;
 

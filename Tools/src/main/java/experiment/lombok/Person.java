@@ -3,6 +3,7 @@ package experiment.lombok;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.ToString;
+import org.msgpack.annotation.Message;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,26 +14,29 @@ import lombok.ToString;
 public
 @ToString(exclude = "id")
 @Data
-class Person {
+@Message
+class Person{
     String name;
     int age;
     int id;
 
-    public void NonNullExample(@NonNull String person) {
-        System.out.println("Hello");
+    public void NonNullExample( @NonNull String person ){
+        System.out.println( "Hello" );
     }
 
-    public static void main(String[] args) {
+    public static void main( String[] args ){
         Person p = new Person();
-        p.setAge(20);
+        p.setAge( 20 );
         p.getName();
 
-        System.out.println(p);
-        p.NonNullExample(null);
+        System.out.println( p );
+        p.NonNullExample( null );
 
-        ConstructorExample<String> constructorExample = new ConstructorExample<String>(10, 20, "d");
+        ConstructorExample<String> constructorExample = new ConstructorExample<String>( 10, 20, "d" );
         //ConstructorExample<String> constructorExample1 = new ConstructorExample<String>("d");
 
     }
 
 }
+
+

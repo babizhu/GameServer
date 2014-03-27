@@ -1,8 +1,9 @@
-package org.bbz.util.serialize.impl;
+package util.serialize.impl;
 
 
 import com.alibaba.fastjson.JSON;
-import org.bbz.util.serialize.ISerialize;
+import util.serialize.ISerialize;
+
 
 /**
  * 这是一个采用FastJson的实现

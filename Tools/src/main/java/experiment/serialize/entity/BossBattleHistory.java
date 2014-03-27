@@ -2,18 +2,19 @@ package experiment.serialize.entity;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import experiment.lombok.Person;
+import experiment.serialize.Student;
 import lombok.Data;
 import lombok.ToString;
-import org.bbz.util.serialize.Serialize;
 import org.msgpack.annotation.Message;
+import util.nosql.NosqlUtil;
 
 import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Administrator on 14-3-21.
+ *
  */
-
 @Message
 @ToString
 @Data
@@ -23,18 +24,26 @@ public class BossBattleHistory{
     Map<Integer, SimpleChallenger> map;
     private RankInfoWithKiller history;
     private final int bossHpMax;
+    private Student student;
+    private Person person;
+    private Object obj;
 
 
-    BossBattleHistory(int bossHpMax){
+    BossBattleHistory( int bossHpMax ){
         map = Maps.newHashMap();
         for( int i = 0; i < 10; i++ ) {
-            SimpleChallenger sc = new SimpleChallenger("liukun", "刘老爷", i * 10, i * 100, i);
-            map.put(i, sc);
+            SimpleChallenger sc = new SimpleChallenger( "liukun", "刘老爷", i * 10, i * 100, i );
+            map.put( i, sc );
         }
         List<IChallenger> list = Lists.newArrayList();
         history = new RankInfoWithKiller();
         history.setData();
         this.bossHpMax = bossHpMax;
+        student = new Student( "aabb", bossHpMax );
+        person = new Person();
+        person.setName( "aabb" );
+        obj = null;
+
     }
 
     public BossBattleHistory(){
@@ -44,7 +53,7 @@ public class BossBattleHistory{
     /**
      * 先保存到档期表，完成之后再换
      */
-    void saveHistory(List<IChallenger> topTen, IChallenger killer){
+    void saveHistory( List<IChallenger> topTen, IChallenger killer ){
 
 
     }
@@ -60,18 +69,27 @@ public class BossBattleHistory{
         return history;
     }
 
-    public static void main(String[] args){
-        BossBattleHistory bh = new BossBattleHistory(9999);
+    public static void main( String[] args ){
 
-        byte[] encode = Serialize.getInstance().encode(bh);
-        BossBattleHistory bh1 = Serialize.getInstance().decode(encode, BossBattleHistory.class);
-        System.out.println(bh1);
-        System.out.println(bh1.getMap().size());
-        System.out.println(bh1.getMap().get(2));
+        String key = "ab1";
+        long begin = System.nanoTime();
+        BossBattleHistory bh1 = null;
+        for( int i = 0; i < 10000; i++ ) {
+            BossBattleHistory bh = new BossBattleHistory( i );
 
+            NosqlUtil.INSTANCE.set( key, bh );
 
-//        bh1.get
+            bh1 = NosqlUtil.INSTANCE.get( key, BossBattleHistory.class );
+            if( bh1 == null ) {
+                System.out.println( bh1 );
+                return;
+            }
+        }
 
+        System.out.println( "操作耗时：" + (System.nanoTime() - begin) / 1000000000f + "秒" );
+        System.out.println( bh1 );
+        System.out.println( bh1.getMap().size() );
+        System.out.println( bh1.getMap().get( 2 ) );
 
     }
 

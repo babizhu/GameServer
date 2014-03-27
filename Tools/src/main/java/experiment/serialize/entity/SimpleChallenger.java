@@ -3,8 +3,8 @@ package experiment.serialize.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.ToString;
-import org.bbz.util.serialize.Serialize;
 import org.msgpack.annotation.Message;
+import util.serialize.Serialize;
 
 /**
  * Created by Administrator on 14-3-21.
@@ -24,10 +24,10 @@ public class SimpleChallenger implements IChallenger{
     public SimpleChallenger(){
     }
 
-    public static void main(String[] args){
-        IChallenger simpleChallenger = new SimpleChallenger("liukun", "刘老爷", 200, 1000, 1);
-        byte[] encode = Serialize.getInstance().encode(simpleChallenger);
-        SimpleChallenger simpleChallenger1 = Serialize.getInstance().decode(encode, SimpleChallenger.class);
-        System.out.println(simpleChallenger1);
+    public static void main( String[] args ){
+        IChallenger simpleChallenger = new SimpleChallenger( "liukun", "刘老爷", 200, 1000, 1 );
+        byte[] encode = Serialize.INSTANCE.encode( simpleChallenger );
+        SimpleChallenger simpleChallenger1 = Serialize.INSTANCE.decode( encode, SimpleChallenger.class );
+        System.out.println( simpleChallenger1 );
     }
 }

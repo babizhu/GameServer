@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="3144158318">
-    <data-source source="LOCAL" name="Data Source" product="MySQL" version="5.5.20" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.26 ( Revision: ${bzr.revision-id} )" uuid="ea62ab78-807a-4594-8737-fa4726a075a3">
-      <extra-name-characters>#@</extra-name-characters>
-      <identifier-quote-string>`</identifier-quote-string>
+  <component name="DataSourceManagerImpl" format="xml" hash="1790080779">
+    <data-source source="LOCAL" name="Data Source" uuid="f6935924-9fca-4478-819a-b49d1417e30a">
+      <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://192.168.1.202:3306/mobile10004</jdbc-url>
+      <jdbc-url>jdbc:mysql://192.168.1.202/lk</jdbc-url>
       <user-name>root</user-name>
       <user-password>dfc7dfd2dfd0df98df9adf9bdf99</user-password>
       <libraries>

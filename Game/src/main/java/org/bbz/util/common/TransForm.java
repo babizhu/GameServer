@@ -17,14 +17,18 @@ public class TransForm{
          * @param input 用"逗号"分隔的字符串
          * @return 返回的整型数组，如果输入字符串长度为0，返回一个长度为0的数组
          */
-        public static int[] toInt(String input){
+        public static int[] toInt( String input ){
             if( input == null ) {
+
                 throw new IllegalArgumentException();
             }
-            String[] arr = input.split(",");
+            if( input.isEmpty() ) {
+                return new int[0];
+            }
+            String[] arr = input.split( "," );
             int ret[] = new int[arr.length];
             for( int i = 0; i < arr.length; i++ ) {
-                ret[i] = Integer.parseInt(arr[i]);
+                ret[i] = Integer.parseInt( arr[i] );
             }
             return ret;
         }
@@ -39,7 +43,7 @@ public class TransForm{
          * @param input 整型数组
          * @return 返回的字符串，如果输入长度为0，怎返回空字符串
          */
-        public static String toStr(int[] input){
+        public static String toStr( int[] input ){
             if( input == null ) {
                 throw new IllegalArgumentException();
             }
@@ -48,9 +52,9 @@ public class TransForm{
             }
             StringBuilder ret = new StringBuilder();
             for( int i : input ) {
-                ret.append(i).append(",");
+                ret.append( i ).append( "," );
             }
-            return ret.deleteCharAt(ret.length() - 1).toString();
+            return ret.deleteCharAt( ret.length() - 1 ).toString();
         }
 
         /**
@@ -60,7 +64,7 @@ public class TransForm{
          * @param input 整型列表
          * @return 返回的字符串，如果输入长度为0，怎返回空字符串
          */
-        public static String toStr(List<Integer> input){
+        public static String toStr( List<Integer> input ){
             if( input == null ) {
                 throw new IllegalArgumentException();
             }
@@ -69,9 +73,9 @@ public class TransForm{
             }
             StringBuilder ret = new StringBuilder();
             for( int i : input ) {
-                ret.append(i).append(",");
+                ret.append( i ).append( "," );
             }
-            return ret.deleteCharAt(ret.length() - 1).toString();
+            return ret.deleteCharAt( ret.length() - 1 ).toString();
         }
 
     }
@@ -84,14 +88,17 @@ public class TransForm{
          * @param input 用"逗号"分隔的字符串
          * @return 返回的整型List，如果输入字符串长度为0，返回一个长度为0的List
          */
-        public static List<Integer> toList(String input){
+        public static List<Integer> toList( String input ){
             if( input == null ) {
                 throw new IllegalArgumentException();
             }
             List<Integer> ret = Lists.newArrayList();
-            String[] arr = input.split(",");
+            if( input.isEmpty() ) {
+                return ret;
+            }
+            String[] arr = input.split( "," );
             for( String anArr : arr ) {
-                ret.add(Integer.parseInt(anArr));
+                ret.add( Integer.parseInt( anArr ) );
             }
             return ret;
         }
@@ -101,7 +108,7 @@ public class TransForm{
          *
          * @param input list
          */
-        public static <T> void mix(List<T> input){
+        public static <T> void mix( List<T> input ){
             if( input == null ) {
                 throw new IllegalArgumentException();
             }
@@ -111,15 +118,15 @@ public class TransForm{
             }
             int mixCount = size;
             for( int i = 0; i < mixCount; i++ ) {
-                int randomIndex = RandomUtil.getInt(size);
-                T temp = input.get(randomIndex);
-                input.set(randomIndex, input.get(i));
-                input.set(i, temp);
+                int randomIndex = RandomUtil.getInt( size );
+                T temp = input.get( randomIndex );
+                input.set( randomIndex, input.get( i ) );
+                input.set( i, temp );
             }
         }
 
     }
 
-    public static void main(String[] args){
+    public static void main( String[] args ){
     }
 }
