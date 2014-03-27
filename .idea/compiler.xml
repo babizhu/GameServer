@@ -24,7 +24,6 @@
         <processorPath useClasspath="true" />
         <module name="Game" />
         <module name="GameTools" />
-        <module name="RechargeServer" />
         <module name="Tools" />
       </profile>
     </annotationProcessing>

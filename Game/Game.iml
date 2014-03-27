@@ -17,7 +17,6 @@
     <orderEntry type="library" name="Maven: org.jdom:jdom:2.0.2" level="project" />
     <orderEntry type="library" name="Maven: org.xsocket:xSocket:2.8.15" level="project" />
     <orderEntry type="library" name="Maven: com.alibaba:druid:0.2.12" level="project" />
-    <orderEntry type="library" name="Maven: org.msgpack:msgpack:0.6.8" level="project" />
     <orderEntry type="library" name="Maven: com.googlecode.json-simple:json-simple:1.1.1" level="project" />
     <orderEntry type="library" name="Maven: org.javassist:javassist:3.16.1-GA" level="project" />
     <orderEntry type="library" name="Maven: com.alibaba:fastjson:1.1.23" level="project" />
@@ -25,8 +24,8 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.projectlombok:lombok:1.12.2" level="project" />
     <orderEntry type="library" name="Maven: izpack:izpack-standalone-compiler:3.7.2" level="project" />
     <orderEntry type="library" name="Maven: org.mongodb:mongo-java-driver:2.11.3" level="project" />
-    <orderEntry type="module" module-name="Tools" />
     <orderEntry type="library" name="Maven: joda-time:joda-time:2.3" level="project" />
+    <orderEntry type="module" module-name="Tools" />
   </component>
 </module>
 

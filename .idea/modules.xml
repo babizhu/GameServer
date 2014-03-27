@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Game/Game.iml" filepath="$PROJECT_DIR$/Game/Game.iml" />
-      <module fileurl="file://$PROJECT_DIR$/RechargeServer/RechargeServer.iml" filepath="$PROJECT_DIR$/RechargeServer/RechargeServer.iml" />
       <module fileurl="file://$PROJECT_DIR$/Tools/Tools.iml" filepath="$PROJECT_DIR$/Tools/Tools.iml" />
     </modules>
   </component>
