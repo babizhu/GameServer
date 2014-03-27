@@ -1,7 +1,6 @@
 package org.bbz.game.module.fighters;
 
 import com.google.common.collect.Sets;
-import com.mongodb.BasicDBObject;
 import lombok.Data;
 import lombok.ToString;
 import org.bbz.game.ClientException;
@@ -32,6 +31,35 @@ public class HeroManager{
     public HeroManager( String uname ){
         db = new HeroDataProvider( uname );
         heros = db.getAll();
+    }
+
+    public static void main( String[] args ){
+        HeroManager manager = new HeroManager( "lk" );
+        System.out.println( manager.getHeros() );
+
+
+//        test.removeAll();
+//        System.out.println( "开始写入一亿条数据........");
+//        long begin = System.nanoTime();
+//        for( int i = 0; i < 1; i++ ) {
+//            test.test();
+//
+//        }
+//        System.out.println( "完成写入一亿条数据........");
+//        System.out.println( "写入操作耗时：" + (System.nanoTime() - begin) / 1000000000f + "秒" );
+
+
+//        test.test();
+//        long begin = System.nanoTime();
+//        for( int i = 0; i < 500; i++ ) {
+//            int index = RandomUtil.getInt( 50000000 );
+//            DBObject condition = new BasicDBObject( "_id", index );
+//            Hero hero = test.findOne( condition );
+//
+//            System.out.println( hero.getId() + ":" + hero.getPosition() + ":" + (hero.getId() *100 == hero.getPosition()) );
+//        }
+//        System.out.println( "查找操作耗时：" + (System.nanoTime() - begin) / 1000000000f + "秒" );
+
     }
 
     /**
@@ -76,41 +104,6 @@ public class HeroManager{
             hero.setEquipments( equipments );
             db.add( hero );
         }
-    }
-
-
-    public static void main( String[] args ){
-        HeroManager manager = new HeroManager( "lk" );
-        int id = 324444;
-        System.out.println( manager.db.getCollection().count() );
-        System.out.println( manager.getHeroById( id ) );
-        manager.db.remove( id );
-        System.out.println( manager.getHeroById( id ) );
-        System.out.println( manager.db.getCollection().find( new BasicDBObject( "_id", id ) ).explain() );
-
-
-//        test.removeAll();
-//        System.out.println( "开始写入一亿条数据........");
-//        long begin = System.nanoTime();
-//        for( int i = 0; i < 1; i++ ) {
-//            test.test();
-//
-//        }
-//        System.out.println( "完成写入一亿条数据........");
-//        System.out.println( "写入操作耗时：" + (System.nanoTime() - begin) / 1000000000f + "秒" );
-
-
-//        test.test();
-//        long begin = System.nanoTime();
-//        for( int i = 0; i < 500; i++ ) {
-//            int index = RandomUtil.getInt( 50000000 );
-//            DBObject condition = new BasicDBObject( "_id", index );
-//            Hero hero = test.findOne( condition );
-//
-//            System.out.println( hero.getId() + ":" + hero.getPosition() + ":" + (hero.getId() *100 == hero.getPosition()) );
-//        }
-//        System.out.println( "查找操作耗时：" + (System.nanoTime() - begin) / 1000000000f + "秒" );
-
     }
 
 
