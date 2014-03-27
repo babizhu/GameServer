@@ -1,6 +1,8 @@
 package org.bbz.game.module.fighters;
 
 import com.google.common.collect.Sets;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
 import lombok.Data;
 import lombok.ToString;
 import org.bbz.game.ClientException;
@@ -35,30 +37,29 @@ public class HeroManager{
 
     public static void main( String[] args ){
         HeroManager manager = new HeroManager( "lk" );
-        System.out.println( manager.getHeros() );
 
+        manager.db.getCollection().drop();
 
-//        test.removeAll();
-//        System.out.println( "开始写入一亿条数据........");
-//        long begin = System.nanoTime();
-//        for( int i = 0; i < 1; i++ ) {
-//            test.test();
-//
-//        }
-//        System.out.println( "完成写入一亿条数据........");
-//        System.out.println( "写入操作耗时：" + (System.nanoTime() - begin) / 1000000000f + "秒" );
+        System.out.println( "开始写入一百万条数据........" );
+        long begin = System.nanoTime();
+        for( int i = 0; i < 1; i++ ) {
+            manager.test();
+
+        }
+        System.out.println( "完成写入一亿条数据........" );
+        System.out.println( "写入操作耗时：" + (System.nanoTime() - begin) / 1000000000f + "秒" );
 
 
 //        test.test();
-//        long begin = System.nanoTime();
-//        for( int i = 0; i < 500; i++ ) {
-//            int index = RandomUtil.getInt( 50000000 );
-//            DBObject condition = new BasicDBObject( "_id", index );
-//            Hero hero = test.findOne( condition );
-//
-//            System.out.println( hero.getId() + ":" + hero.getPosition() + ":" + (hero.getId() *100 == hero.getPosition()) );
-//        }
-//        System.out.println( "查找操作耗时：" + (System.nanoTime() - begin) / 1000000000f + "秒" );
+        begin = System.nanoTime();
+        for( int i = 0; i < 500; i++ ) {
+            int index = RandomUtil.getInt( 1000000 );
+            DBObject condition = new BasicDBObject( "_id", index );
+            Hero hero = manager.db.findOne( condition );
+
+            System.out.println( hero.getId() + ":" + hero.getPosition() + ":" + (hero.getId() * 100 == hero.getPosition()) );
+        }
+        System.out.println( "查找操作耗时：" + (System.nanoTime() - begin) / 1000000000f + "秒" );
 
     }
 
@@ -85,13 +86,13 @@ public class HeroManager{
     }
 
     private void test(){
-        for( int i = 0; i < 100; i++ ) {
+        for( int i = 0; i < 1000000; i++ ) {
 
 
             Hero hero = new Hero();
 
             hero.setId( i );
-            hero.setPosition( i * 10 );
+            hero.setPosition( i * 1000000 );
             hero.setName( "abcd" );
             hero.setExp( RandomUtil.getInt( 1909090 ) );
             Set<Equipment> equipments = Sets.newHashSet();

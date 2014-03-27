@@ -22,9 +22,9 @@ public abstract class AbstractDataProviderWithIdentity<T extends IdentityObj>{
         collection = MongoUtil.INSTANCE.getDB().getCollection( tableName );
     }
 
-//    public IdentityObj findOne( DBObject conditon ){
-//        return decode( collection.findOne( conditon ) );
-//    }
+    public T findOne( DBObject conditon ){
+        return decode( collection.findOne( conditon ) );
+    }
 
 //    public List<IdentityObj> findBy( String key, String content ){
 //        return null;

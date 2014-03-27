@@ -24,6 +24,9 @@
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.26" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.projectlombok:lombok:1.12.2" level="project" />
     <orderEntry type="library" name="Maven: izpack:izpack-standalone-compiler:3.7.2" level="project" />
+    <orderEntry type="library" name="Maven: org.mongodb:mongo-java-driver:2.11.3" level="project" />
+    <orderEntry type="module" module-name="Tools" />
+    <orderEntry type="library" name="Maven: joda-time:joda-time:2.3" level="project" />
   </component>
 </module>
 
