@@ -5,7 +5,7 @@ import org.jdom2.Element;
 /**
  * 模版
  * @author liukun
- * 2013-12-11 17:28:32
+ * 2014-3-28 13:31:19
  */
 public class CoronaBankTemplet {
 

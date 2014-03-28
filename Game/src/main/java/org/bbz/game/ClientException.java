@@ -13,7 +13,6 @@ import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
-//@Getter
 @Data
 public class ClientException extends RuntimeException{
 

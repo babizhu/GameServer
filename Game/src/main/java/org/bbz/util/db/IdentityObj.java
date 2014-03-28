@@ -7,5 +7,5 @@ package org.bbz.util.db;
  * 游戏中具有唯一id的实体类都必须继承此类
  */
 public interface IdentityObj{
-    public int getId();
+    public long getId();
 }

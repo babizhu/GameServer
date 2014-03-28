@@ -1,6 +1,7 @@
 package org.bbz.game.module.fighters;
 
 import lombok.Data;
+import org.bbz.game.cfg.fighter.FighterTemplet;
 
 /**
  * user         LIUKUN
@@ -9,9 +10,11 @@ import lombok.Data;
 
 @Data
 public class Fighter{
-    private int templetId;
-    private int hp;
-    private int hpMax;
-    private int phyAttack;
-    private int phyDefender;
+    private FighterTemplet      templet;
+    private int                 hp;
+    private int                 hpMax;
+    private int                 phyAttack;
+    private int                 phyDefender;
+    private int                 magicAttack;
+    private int                 magicDefender;
 }

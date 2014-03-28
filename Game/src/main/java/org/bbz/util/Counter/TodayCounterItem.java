@@ -1,4 +1,4 @@
-package org.bbz.util.Counter;
+package org.bbz.util.counter;
 
 import lombok.Data;
 import lombok.ToString;

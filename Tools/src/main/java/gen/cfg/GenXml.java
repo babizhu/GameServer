@@ -2,6 +2,7 @@ package gen.cfg;
 
 import gen.util.D;
 import gen.util.Util;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import util.FileUtil;
@@ -37,6 +38,12 @@ class GenXml{
             if( row.getRowNum() < D.EXCEL_HEAD_COUNT ) {
                 continue;
             }
+
+            if( row.getCell( 0 ) == null ){
+                System.out.println( "以下空白，停止处理" );
+                break;
+            }
+
             sb.append("<").append(className).append(">").
                     append(genContent(row)).append("</").append(className).append(">");
         }
@@ -57,11 +64,20 @@ class GenXml{
 
     }
 
+    private void printRow( Row row ){
+        for( Cell cell : row ) {
+            System.out.print( cell + " " );
+        }
+        System.out.println();
+
+    }
     private String genContent(Row row){
+        printRow( row );
         StringBuilder sb = new StringBuilder();
         int i = 0;
         for( FieldElement element : fields ) {
             sb.append("<").append(element.name).append(">");
+
             String data = row.getCell(i++).toString();
             if( element.type.equals("int") ) {
                 int pointPos = data.indexOf('.');

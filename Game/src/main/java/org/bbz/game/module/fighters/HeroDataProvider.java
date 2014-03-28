@@ -3,6 +3,8 @@ package org.bbz.game.module.fighters;
 import com.google.common.collect.Sets;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
+import org.bbz.game.cfg.fighter.FighterTemplet;
+import org.bbz.game.cfg.fighter.FighterTempletCfg;
 import org.bbz.game.module.equipments.Equipment;
 import org.bbz.util.common.TransForm;
 import org.bbz.util.db.AbstractDataProviderWithIdentity;
@@ -24,7 +26,7 @@ public class HeroDataProvider extends AbstractDataProviderWithIdentity<Hero>{
 
     @Override
     protected Hero decode( DBObject object ){
-        Hero hero = new Hero();
+        Hero hero = new Hero( (int) object.get( "_id" ) );
         hero.setName( (String) object.get( "name" ) );
         Set<Equipment> equipments = Sets.newHashSet();
         int[] arr = TransForm.ArrayType.toInt( (String) object.get( "equipmentS" ) );
@@ -35,8 +37,10 @@ public class HeroDataProvider extends AbstractDataProviderWithIdentity<Hero>{
         }
 
         hero.setEquipments( equipments );
-        hero.setId( (int) object.get( "_id" ) );
         hero.setPosition( (int) object.get( "position" ) );
+        int templetId = (int) object.get( "templetId" );
+        FighterTemplet templet = FighterTempletCfg.getFighterTempletById( templetId );
+        hero.setTemplet( templet );
         return hero;
     }
 
@@ -54,6 +58,7 @@ public class HeroDataProvider extends AbstractDataProviderWithIdentity<Hero>{
             equipmentStr += ",";
         }
         obj.put( "equipmentS", equipmentStr );
+        obj.put( "templetId", hero.getTemplet().getId() );
         return obj;
     }
 
